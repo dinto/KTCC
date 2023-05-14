@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_alerts.html' %}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Player Registration Form</h2>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST" class="post-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ forms.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+        </form> 
+    </div>
+</div>
+
+{% endblock %}
+
