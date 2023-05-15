@@ -54,10 +54,11 @@ def players_regi(request):
         forms = CreatePlayer(request.POST, request.FILES)
 
         if forms.is_valid():
-            handle_uploaded_file(request.FILES['Pic_img']) 
-            #forms.save()
-        messages.success(request, "Player Registration Successfully!")
-        return redirect("home")
+            #handle_uploaded_file(request.FILES['Pic_img']) 
+            forms.save()
+            return redirect("home")
+        #messages.success(request, "Player Registration Successfully!")
+        
     else:
         forms = CreatePlayer()
     context = {

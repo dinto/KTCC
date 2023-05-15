@@ -16,7 +16,7 @@ class PlayerInfo(models.Model):
     phone_number=models.IntegerField()
     mail_id= models.EmailField(max_length=100)
     aadharcard_no=models.CharField(max_length=100)
-    aadharcard_img = models.ImageField(null=True,blank=True, upload_to='images/')
+    aadharcard_img = models.ImageField(null=True,blank=True, upload_to='aadharcard/')
     Role_choice = (
         ("Batsman", "Batsman"),
         ("Bowling Allrounder", "Bowling Allrounder"),
@@ -25,7 +25,7 @@ class PlayerInfo(models.Model):
         ("Bowler", "Bowler"),
     )
     Role = models.CharField(choices=Role_choice, max_length=22)
-    Pic_img = models.ImageField(null=True,blank=True, upload_to='images/')
+    Pic_img = models.ImageField(null=True,blank=True, upload_to='Profile_Pic/')
     Hand_choice = (
         ("Right Handed Bat", "Right Handed Bat"),
         ("Left Handed Bat", "Left Handed Bat"),
@@ -45,7 +45,7 @@ class PlayerInfo(models.Model):
     Bowling_style = models.CharField(choices=Arm_choice, max_length=22)
     
     class Meta:
-        unique_together = ["name", "age"]
+        unique_together = ["mail_id"]
         verbose_name_plural = 'Player List'
 
     def __str__(self):
