@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreatePlayer
-from KTCC.fileupload import handle_uploaded_file
 
 # Create your views here.
 
