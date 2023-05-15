@@ -11,6 +11,8 @@ from .forms import CreatePlayer
 def KTCC(request): 
     return render(request,'index.html',{})
 
+def welcome(request): 
+    return render(request,'welcome.html',{})
 
 def SignupPage(request):
     if request.method=='POST':

@@ -2,5 +2,7 @@ from django.urls import path
 from KTCC import views
 
 urlpatterns = [ 
-    path('', views.KTCC, name='index'), 
+    path('', views.welcome, name='welcome'), 
+    path('KTCC/', views.KTCC, name='index'),
+
 ]
