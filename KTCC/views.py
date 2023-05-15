@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreatePlayer
+from KTCC.models import PlayerInfo
 
 # Create your views here.
 
@@ -13,6 +14,14 @@ def KTCC(request):
 
 def welcome(request): 
     return render(request,'welcome.html',{})
+    #return render(request,'Teams.html',{})
+
+def Teams(request): 
+    return render(request,'Teams.html',{})
+
+def Players(request): 
+    players= PlayerInfo.objects.all()
+    return render(request,'Players.html',{'players':players})
 
 def SignupPage(request):
     if request.method=='POST':

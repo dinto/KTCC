@@ -25,7 +25,6 @@ urlpatterns = [
     path('login/',views.LoginPage,name='login'),
     path('signup/',views.SignupPage,name='signup'), 
     path('logout/',views.LogoutPage,name='logout'),
-    path('registration/', views.players_regi, name='players_regi'),
 ]
 
   
