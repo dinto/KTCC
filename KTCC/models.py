@@ -54,3 +54,24 @@ class PlayerInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+class Setting(models.Model):
+    Season=models.CharField(max_length=100)
+    Maximum_Bid_Point= models.IntegerField()
+    Maximum_Players_Per_Team =models.IntegerField()
+    Minimum_Players_Per_Team =models.IntegerField()
+    Winning_point=models.IntegerField()
+    NR_point=models.IntegerField()
+    Total_over_Per_Innings=models.IntegerField()
+
+class TeamInfo(models.Model):
+    Team_Name = models.CharField(max_length=100)
+    Short_Name = models.CharField(max_length=100)
+    Team_Logo = models.ImageField(null=True,blank=True, upload_to='Team_Logo/')
+
+    class Meta:
+        unique_together = ["Team_Name"]
+        verbose_name_plural = 'Team List'
+
+    def __str__(self):
+        return self.Team_Name

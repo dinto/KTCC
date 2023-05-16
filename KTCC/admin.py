@@ -4,3 +4,5 @@ from .models import *
 
 # Register your models here.
 admin.site.register(PlayerInfo)
+admin.site.register(Setting)
+admin.site.register(TeamInfo)

@@ -1,6 +1,6 @@
 from django import forms
 from .models import PlayerInfo
-
+from .models import TeamInfo
 
 class CreatePlayer(forms.ModelForm): 
 
@@ -34,6 +34,10 @@ class CreatePlayer(forms.ModelForm):
 
 
         
-        
+class CreateTeam(forms.ModelForm): 
+    class Meta:
+        model = TeamInfo
+        fields = '__all__'
+ 
        
      

@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreatePlayer
 from KTCC.models import PlayerInfo
+from .forms import CreateTeam
+from KTCC.models import TeamInfo
 
 # Create your views here.
 
@@ -17,7 +19,8 @@ def welcome(request):
     #return render(request,'Teams.html',{})
 
 def Teams(request): 
-    return render(request,'Teams.html',{})
+    Teams= TeamInfo.objects.all()
+    return render(request,'Teams.html',{'Teams':Teams})
 
 def Players(request): 
     players= PlayerInfo.objects.all()
@@ -88,13 +91,13 @@ def Matches(request):
 @login_required(login_url='login')
 def profile(request): 
     if request.method == "POST":
-        forms = CreatePlayer(request.POST, request.FILES)
+        forms = CreateTeam(request.POST, request.FILES)
         if forms.is_valid():
             forms.save()
-            return redirect("Players")
+            return redirect("KTCC")
     
     else:
-        forms = CreatePlayer()
+        forms = CreateTeam()
     context = {
         "forms": forms
     }
