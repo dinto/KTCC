@@ -15,16 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from KTCC import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('KTCC.urls')),
-    path('home/',views.KTCC,name='home'),
-    path('login/',views.LoginPage,name='login'),
-    path('signup/',views.SignupPage,name='signup'), 
-    path('logout/',views.LogoutPage,name='logout'),
 ]
 
   

@@ -1,10 +1,103 @@
 
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+<style>
+
+
+       .card{
+        width: 320px;
+        border: none;
+        border-radius: 15px;
+        padding: 8px;
+        background-color:#5b92eb;
+        height: 320px;
+       }
+       .upper{
+        height: 100px;
+       }
+       .upper img{
+        width: 25%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+       }
+       .user{
+        position: relative;
+       }
+       .profile img{
+        height: 80px;
+        width: 80px;
+        margin-top:2px;
+       }
+       .profile{
+        position: absolute;
+        top:-50px;
+        left: 38%;
+        height: 90px;
+        width: 90px;
+        border:3px solid #fff;
+        border-radius: 50%;
+       }
+</style>
+
 <br/>
 <br/>
 <br/>
-<h2>Players</h2>
-{{players}}
+<h2 style="text-align: center;">Registered Players</h2>
+
+<div class="container d-flex " style="align-items: left;">
+    {% for players_list in players %}
+    
+        <div class="card">
+            <div class="upper">
+              <img src="{% static '/images/LogoT10.jpeg' %}" class="img-fluid">
+            </div>
+            <div class="user text-center">
+              <div class="profile">
+             <img src="{% static '/Profile_Pic/Dinto_1_4d5lxMV.jpg' %}" class="rounded-circle" width="80">
+              </div>
+            </div>
+            <div class="mt-5 text-center" >
+                
+              <h4 class="mb-0" style="color: #e3c268;"><b>{{ players_list.name }}</b></h4>
+              <!-- <h4 class="mb-0">{{ players_list.Profile_Pic }}</h4>-->
+              <div class="row">
+                <div class="col-6" style="text-align: right; color: #e3c268;">
+                    Role :
+                </div>
+                <div class="col-6" style="text-align: left; color: #e3c268;">
+                    {{ players_list.Role }}
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6" style="text-align: right; color: #e3c268;">
+                    Batting style :
+                </div>
+                <div class="col-6" style="text-align: left; color: #e3c268;">
+                    {{ players_list.Batting_style }}
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6" style="text-align: right; color: #e3c268;">
+                    Bowling style :
+                </div>
+                <div class="col-6" style="text-align: left; color: #e3c268;">
+                    {{ players_list.Bowling_style }}
+                </div>
+              </div>              
+            </div>
+             
+           </div>
+    
+       &nbsp; &nbsp;
+    
+    {% endfor %}    
+
+
+   
+  </div>
 {% endblock content %}

@@ -36,7 +36,7 @@ def SignupPage(request):
 
             my_user=User.objects.create_user(uname,email,pass1)
             my_user.save()
-            return redirect('login')
+            return redirect('KTCC')
     return render (request,'Authentication/signup.html')
 
 def LoginPage(request):
@@ -46,7 +46,7 @@ def LoginPage(request):
         user=authenticate(request,username=username,password=pass1)
         if user is not None:
             login(request,user)
-            return redirect('home')
+            return redirect('KTCC')
         else:
            return redirect('login')
            # return HttpResponse ("Username or Password is incorrect!!!")
@@ -66,7 +66,7 @@ def players_regi(request):
         if forms.is_valid():
             #handle_uploaded_file(request.FILES['Pic_img']) 
             forms.save()
-            return redirect("home")
+            return redirect("Players")
         #messages.success(request, "Player Registration Successfully!")
         
     else:
@@ -75,3 +75,12 @@ def players_regi(request):
         "forms": forms
     }
     return render(request, "registration.html", context)
+
+def Table(request): 
+    return render(request,'Table.html',{})
+
+def Stats(request): 
+    return render(request,'Stats.html',{})
+
+def Matches(request): 
+    return render(request,'Matches.html',{})
