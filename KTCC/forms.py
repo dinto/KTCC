@@ -8,6 +8,9 @@ class CreatePlayer(forms.ModelForm):
     class Meta:
         model = PlayerInfo
         fields = '__all__'
+        widgets ={
+            'dob': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
    #     exclude = ("Pic_img", "aadharcard_img",)
    #     'Pic_img': forms.FileField()
 

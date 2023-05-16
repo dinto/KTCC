@@ -6,19 +6,17 @@ class PlayerInfo(models.Model):
     name = models.CharField(max_length=100)
     dob = models.DateField()
     age = models.IntegerField()
+    place = models.CharField(max_length=100)
+    phone_number=models.IntegerField()
+    mail_id= models.EmailField(max_length=100)
     gender_choice = (
         ("male", "Male"),
         ("Female", "Female"),
     )
     gender = models.CharField(choices=gender_choice, max_length=10)
-    country = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    place = models.CharField(max_length=100)
-    phone_number=models.IntegerField()
-    mail_id= models.EmailField(max_length=100)
-    aadharcard_no=models.CharField(max_length=100)
-    #aadharcard_img = models.ImageField(null=True,blank=True, upload_to='aadharcard/')
-    aadharcard_img = models.FileField(upload_to='aadharcard/')
+    #country = models.CharField(max_length=100)
+    #state = models.CharField(max_length=100)
+
     Role_choice = (
         ("Batsman", "Batsman"),
         ("Bowling Allrounder", "Bowling Allrounder"),
@@ -27,7 +25,6 @@ class PlayerInfo(models.Model):
         ("Bowler", "Bowler"),
     )
     Role = models.CharField(choices=Role_choice, max_length=22)
-    Pic_img = models.ImageField(null=True,blank=True, upload_to='Profile_Pic/')
     Hand_choice = (
         ("Right Handed Bat", "Right Handed Bat"),
         ("Left Handed Bat", "Left Handed Bat"),
@@ -45,6 +42,12 @@ class PlayerInfo(models.Model):
         ("Left-arm chinaman", "Left-arm chinaman"),
     )
     Bowling_style = models.CharField(choices=Arm_choice, max_length=22)
+    
+    aadharcard_no=models.CharField(max_length=100)
+    #aadharcard_img = models.ImageField(null=True,blank=True, upload_to='aadharcard/')
+    aadharcard = models.FileField(upload_to='aadharcard/')
+    Profile_Pic = models.ImageField(null=True,blank=True, upload_to='Profile_Pic/')
+
     class Meta:
         unique_together = ["mail_id"]
         verbose_name_plural = 'Player List'
