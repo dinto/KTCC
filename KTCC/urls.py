@@ -14,5 +14,6 @@ urlpatterns = [
     path('Table/', views.Table, name='Table'),
     path('Stats/', views.Stats, name='Stats'),
     path('Matches/', views.Matches, name='Matches'),
+    path('profile/', views.profile, name='profile'),
 
 ]

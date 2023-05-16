@@ -84,3 +84,83 @@ def Stats(request):
 
 def Matches(request): 
     return render(request,'Matches.html',{})
+
+@login_required(login_url='login')
+def profile(request): 
+    if request.method == "POST":
+        forms = CreatePlayer(request.POST, request.FILES)
+        if forms.is_valid():
+            forms.save()
+            return redirect("Players")
+    
+    else:
+        forms = CreatePlayer()
+    context = {
+        "forms": forms
+    }
+    return render(request, "profile.html", context)
+
+@login_required(login_url='login')
+def EditProfile(request):
+
+    if request.method == 'POST':
+
+        usern = request.user.username        
+        email = request.POST.get('id_email')
+        auth = request.POST.get('D_Auth')
+        chid = request.POST.get('D_ChID')
+        utyp = request.POST.get('U_Type')
+        loss = request.POST.get('N_Loss')
+
+        if loss == 'on':
+            flos = True
+        else:
+            flos = False
+
+        if usern is None:
+            messages.info(request, 'You must enter Username')
+            return redirect('edit_profile')
+
+        elif email is None:
+            messages.info(request, 'You must enter Email')
+            return redirect('edit_profile')
+
+        elif User.objects.filter(username=usern).exists():
+            messages.info(request, 'Username is already taken')
+            return redirect('edit_profile')
+
+        elif User.objects.filter(email=email).exists():
+            messages.info(request, 'Email is already Taken')
+            return redirect('edit_profile')
+
+        elif auth is None:
+            messages.info(request, 'Authentication Key Must be Entered')
+            return redirect('edit_profile')
+
+        elif chid is None:
+            messages.info(request, 'Channel ID Must be Entered')
+            return redirect('edit_profile')
+
+        elif UserAuthentication.objects.filter(D_Auth=auth).exists():
+            messages.info(request, 'Authentication key in Use')
+            return redirect('edit_profile')
+
+        else:
+            user = User.objects.get(username=user)
+            userauth_obj = UserAuthentication.objects.update(
+                U_User = user,
+                defaults = {
+                    "D_Auth": auth,
+                    "D_ChID": chid,
+                    "U_Type": utyp,
+                    "N_Loss": flos,
+                }
+            )
+            user_obj = User.objects.update(
+                defaults = {
+                "username": username,
+                "email": email
+                }
+            )
+
+    return render(request, 'registration/edit_profile.html')
