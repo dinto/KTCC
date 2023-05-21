@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Season(models.Model):
@@ -75,6 +76,7 @@ class TeamInfo(models.Model):
     Short_Name = models.CharField(max_length=100)
     Team_Logo = models.ImageField(null=True,blank=True, upload_to='Team_Logo/')
     Season = models.ForeignKey(Season,on_delete=models.CASCADE)
+    Users = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ["Team_Name","Season"]
@@ -87,10 +89,10 @@ class CurrentBid(models.Model):
     Player_name = models.ForeignKey(PlayerInfo, on_delete=models.CASCADE)
     Current_Bid_Point = models.IntegerField()
     Team_Name = models.ForeignKey(TeamInfo, on_delete=models.CASCADE)
-    Date =models.DateField()
+    Season = models.ForeignKey(Season,on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ["Player_name"]
+        unique_together = ["Player_name","Season"]
 
     def __str__(self):
         return self.Player_name
@@ -110,9 +112,7 @@ class Bid_Details(models.Model):
 
 class Available_Point_Table(models.Model):
     Team_Name = models.ForeignKey(TeamInfo, on_delete=models.CASCADE)
-    Max_Point = models.IntegerField()
     Available_Point = models.IntegerField()
-    Year=models.IntegerField()
     Season = models.ForeignKey(Season,on_delete=models.CASCADE)
 
     class Meta:

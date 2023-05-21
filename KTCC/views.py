@@ -93,7 +93,9 @@ def profile(request):
     if request.method == "POST":
         forms = CreateTeam(request.POST, request.FILES)
         if forms.is_valid():
+            forms.instance.Users = request.user
             forms.save()
+            messages.success(request, 'Team Details Added Successfully')
             return redirect("KTCC")
     
     else:

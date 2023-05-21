@@ -37,6 +37,7 @@ class CreatePlayer(forms.ModelForm):
 class CreateTeam(forms.ModelForm): 
     class Meta:
         model = TeamInfo
+        exclude = ("Users", )
         fields = '__all__'
  
        
