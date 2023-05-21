@@ -75,3 +75,43 @@ class TeamInfo(models.Model):
 
     def __str__(self):
         return self.Team_Name
+
+class CurrentBid(models.Model):
+    Player_name = models.ForeignKey(PlayerInfo, on_delete=models.CASCADE)
+    Current_Bid_Point = models.IntegerField()
+    Team_Name = models.ForeignKey(TeamInfo, on_delete=models.CASCADE)
+    Date =models.DateField()
+
+    class Meta:
+        unique_together = ["Player_name"]
+
+    def __str__(self):
+        return self.Player_name
+
+class Bid_Details(models.Model):
+    Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
+    Status = models.CharField(max_length=100) #sold or unsold
+    Sold_Point = models.IntegerField()
+    Team_Name = models.ForeignKey(TeamInfo,on_delete=models.CASCADE)
+    Date =models.DateField()
+    Year=models.IntegerField()
+    Season = models.ForeignKey(Setting,  on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["Player_name","Season"]
+
+    def __str__(self):
+        return self.Player_name
+
+class Available_Point_Table(models.Model):
+    Team_Name = models.ForeignKey(TeamInfo, on_delete=models.CASCADE)
+    Max_Point = models.IntegerField()
+    Available_Point = models.IntegerField()
+    Year=models.IntegerField()
+    Season = models.ForeignKey(Setting,on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["Team_Name","Season"]
+
+    def __str__(self):
+        return self.Team_Name
