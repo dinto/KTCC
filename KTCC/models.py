@@ -1,8 +1,22 @@
 from django.db import models
 
 # Create your models here.
-class PlayerInfo(models.Model):
+class Season(models.Model):
+    Season_Name=models.CharField(max_length=100)
+    Maximum_Bid_Point= models.IntegerField()
+    Maximum_Players_Per_Team =models.IntegerField()
+    Minimum_Players_Per_Team =models.IntegerField()
+    Winning_point=models.IntegerField()
+    NR_point=models.IntegerField()
+    Total_over_Per_Innings=models.IntegerField()
     
+    def __str__(self):
+        return self.Season_Name
+
+
+class PlayerInfo(models.Model):
+
+    Season = models.ForeignKey(Season,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     dob = models.DateField()
     age = models.IntegerField()
@@ -49,28 +63,21 @@ class PlayerInfo(models.Model):
     Profile_Pic = models.ImageField(null=True,blank=True, upload_to='Profile_Pic/')
 
     class Meta:
-        unique_together = ["mail_id"]
+        unique_together = ["mail_id","Season"]
         verbose_name_plural = 'Player List'
 
     def __str__(self):
         return self.name
 
-class Setting(models.Model):
-    Season=models.CharField(max_length=100)
-    Maximum_Bid_Point= models.IntegerField()
-    Maximum_Players_Per_Team =models.IntegerField()
-    Minimum_Players_Per_Team =models.IntegerField()
-    Winning_point=models.IntegerField()
-    NR_point=models.IntegerField()
-    Total_over_Per_Innings=models.IntegerField()
 
 class TeamInfo(models.Model):
     Team_Name = models.CharField(max_length=100)
     Short_Name = models.CharField(max_length=100)
     Team_Logo = models.ImageField(null=True,blank=True, upload_to='Team_Logo/')
+    Season = models.ForeignKey(Season,on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ["Team_Name"]
+        unique_together = ["Team_Name","Season"]
         verbose_name_plural = 'Team List'
 
     def __str__(self):
@@ -91,11 +98,9 @@ class CurrentBid(models.Model):
 class Bid_Details(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
     Status = models.CharField(max_length=100) #sold or unsold
-    Sold_Point = models.IntegerField()
+    Sold_Point = models.IntegerField(blank=True, null=True)
     Team_Name = models.ForeignKey(TeamInfo,on_delete=models.CASCADE)
-    Date =models.DateField()
-    Year=models.IntegerField()
-    Season = models.ForeignKey(Setting,  on_delete=models.CASCADE)
+    Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ["Player_name","Season"]
@@ -108,7 +113,7 @@ class Available_Point_Table(models.Model):
     Max_Point = models.IntegerField()
     Available_Point = models.IntegerField()
     Year=models.IntegerField()
-    Season = models.ForeignKey(Setting,on_delete=models.CASCADE)
+    Season = models.ForeignKey(Season,on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ["Team_Name","Season"]
