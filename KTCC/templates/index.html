@@ -33,12 +33,13 @@
                 <a href="{% url 'profile' %}" class="btn btn-primary" style="text-align: center;">Create Team</a>
                 </div>
             </div>
-
+            {% if user.is_superuser %}
             <div class="card" style="width: 9rem; ">
                 <div class="card-body">
                 <a href="{% url 'Bid_Screen' %}" class="btn btn-primary" style="text-align: center;">Start Bid</a>
                 </div>
             </div>
+            {% endif %}
 
         </div>
     </div>

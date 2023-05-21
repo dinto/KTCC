@@ -8,6 +8,7 @@ from KTCC.models import PlayerInfo
 from .forms import CreateTeam
 from KTCC.models import TeamInfo
 from KTCC.models import Bid_Bucket
+from random import randint
 
 # Create your views here.
 
@@ -173,9 +174,20 @@ def EditProfile(request):
 
 @login_required(login_url='login')
 def Bid_Screen(request): 
-    players= PlayerInfo.objects.all()
-    for i in players:
-        print("players name",i.name)
-        #Bucket=Bid_Bucket.objects.create(Player_name=i.name,Status='OPEN',Season=i.Season)
-        #Bucket.save()
-    return render(request, "Bid_Screen.html")
+    Bid_bucket_count=Bid_Bucket.objects.count()
+    print("Bid_bucket_count",Bid_bucket_count)
+    if(Bid_bucket_count>0):
+        print("already bid started")
+        random_object = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
+        context = {
+        "random_object": random_object
+        }
+        print(random_object)
+        return render(request, "Bid_Screen.html",context)
+    else:
+        players= PlayerInfo.objects.all()
+        for i in players:
+            print("players name",i.name)
+            Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season)
+            Bucket.save()
+        return render(request, "Bid_Screen.html")

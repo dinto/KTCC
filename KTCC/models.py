@@ -128,8 +128,8 @@ class Bid_Bucket(models.Model):
     Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ["Player_name","Season"]
+        #unique_together = ["Player_name","Season"]
         verbose_name_plural = 'Bid Bucket'
 
-    def __str__(self):
-        return self.Player_name
+#    def __str__(self):
+#        return self.Player_name

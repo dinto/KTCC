@@ -5,4 +5,8 @@
 <br/>
 <br/>
 <h2>Bid Screen</h2>
+{{random_object}}
+{% if user.is_superuser %}
+<a href="{% url 'Bid_Screen' %}" class="btn btn-primary" style="text-align: center;">Next Player</a>
+{% endif %}
 {% endblock content %}
