@@ -7,6 +7,7 @@ from .forms import CreatePlayer
 from KTCC.models import PlayerInfo
 from .forms import CreateTeam
 from KTCC.models import TeamInfo
+from KTCC.models import Bid_Bucket
 
 # Create your views here.
 
@@ -169,3 +170,12 @@ def EditProfile(request):
             )
 
     return render(request, 'registration/edit_profile.html')
+
+@login_required(login_url='login')
+def Bid_Screen(request): 
+    players= PlayerInfo.objects.all()
+    for i in players:
+        print("players name",i.name)
+        #Bucket=Bid_Bucket.objects.create(Player_name=i.name,Status='OPEN',Season=i.Season)
+        #Bucket.save()
+    return render(request, "Bid_Screen.html")

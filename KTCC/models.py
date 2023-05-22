@@ -99,13 +99,14 @@ class CurrentBid(models.Model):
 
 class Bid_Details(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
-    Status = models.CharField(max_length=100) #sold or unsold
+    Status = models.CharField(max_length=100) #open or sold or unsold
     Sold_Point = models.IntegerField(blank=True, null=True)
     Team_Name = models.ForeignKey(TeamInfo,on_delete=models.CASCADE)
     Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ["Player_name","Season"]
+        verbose_name_plural = 'Bid Details'
 
     def __str__(self):
         return self.Player_name
@@ -120,3 +121,15 @@ class Available_Point_Table(models.Model):
 
     def __str__(self):
         return self.Team_Name
+
+class Bid_Bucket(models.Model):
+    Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
+    Status = models.CharField(max_length=100) #open or sold or unsold
+    Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["Player_name","Season"]
+        verbose_name_plural = 'Bid Bucket'
+
+    def __str__(self):
+        return self.Player_name

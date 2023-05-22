@@ -15,5 +15,6 @@ urlpatterns = [
     path('Stats/', views.Stats, name='Stats'),
     path('Matches/', views.Matches, name='Matches'),
     path('profile/', views.profile, name='profile'),
+    path('Bid_Screen/', views.Bid_Screen, name='Bid_Screen'),
 
 ]
