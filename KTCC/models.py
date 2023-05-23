@@ -103,6 +103,7 @@ class Bid_Details(models.Model):
     Sold_Point = models.IntegerField(blank=True, null=True)
     Team_Name = models.ForeignKey(TeamInfo,on_delete=models.CASCADE)
     Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
+    Current_player=models.BooleanField(default=False)
 
     class Meta:
         unique_together = ["Player_name","Season"]
@@ -126,6 +127,7 @@ class Bid_Bucket(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
     Status = models.CharField(max_length=100) #open or sold or unsold
     Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
+    Current_player=models.BooleanField(default=False)
 
     class Meta:
         #unique_together = ["Player_name","Season"]
