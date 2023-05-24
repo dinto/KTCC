@@ -1,1 +1,31 @@
-team user uniqueness required
+1)team user uniqueness required
+2)whenever players registration going on login button for team is hide (inform to them)
+3)once team click start  bid then team will be inside bid competition
+4)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
+
+
+
+
+workflow:
+Start Bid -> Bid_Screen_new_Player
+next_player -> Bid_Screen_new_Player
+
+Bid_Screen_new_Player : bucket>0 ,if yes then current player true for random number else -> save playersinfo to bid player model and  current player is false
+
+bid screen : print all current player true
+
+
+
+==============
+sold :
+check maximum bid point in team 
+
+
+unsold:
+save as admin in user not Team
+remove that player from bid_bucket
+
+
+
+logic: team can't reduce bid point
+team add next bid point

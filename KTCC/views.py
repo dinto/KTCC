@@ -183,18 +183,26 @@ def Bid_Screen(request):
 
 @login_required(login_url='login')
 def Bid_Screen_new_Player(request): 
-    print("here")
     Bid_bucket_count=Bid_Bucket.objects.count()
     if(Bid_bucket_count>0):
-        random_object = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
-        context = {
-        "random_object": random_object
-        }
-        Bid_Bucket.objects.filter(Player_name = random_object.Player_name).update(Current_player = True)
-        return render(request, "Bid_Screen.html",context)
+        current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
+        if(current_bid_player_count>0):
+            random_object =Bid_Bucket.objects.filter(Current_player = True)
+            context = {
+                "random_object": random_object
+            }
+            return render(request, "Bid_screen_new_player.html",context)
+        else:
+            random_object = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
+            context = {
+            "random_object": random_object
+            }
+            print("random_object",random_object)
+            Bid_Bucket.objects.filter(Player_name = random_object.Player_name).update(Current_player = True)
+            return render(request, "Bid_screen_new_player.html",context)
     else:
         players= PlayerInfo.objects.all()
         for i in players:
             Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
             Bucket.save()
-        return render(request, "Bid_Screen.html")
+        return render(request, "Bid_screen_new_player.html")
