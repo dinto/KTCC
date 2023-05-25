@@ -15,6 +15,7 @@ from django.http import FileResponse
 import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+from KTCC.models import ImportantDate
 
 # Create your views here.
 
@@ -23,7 +24,8 @@ def KTCC(request):
     return render(request,'index.html',{})
 
 def welcome(request): 
-    return render(request,'welcome.html',{})
+    Important_Date = ImportantDate.objects.all()
+    return render(request,'welcome.html',{'ImportantDate':Important_Date})
     #return render(request,'Teams.html',{})
 
 def Teams(request): 

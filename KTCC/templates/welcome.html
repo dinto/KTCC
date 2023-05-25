@@ -4,16 +4,37 @@
 <br/>
 <br/>
 <br/>
-<div>
-    <div class="card" style="width: 18rem; text-align: center; font-family: Merriweather;font-size: 22px; margin-left: 30%; margin-top: 1%;">
+<div class="container">
+    <div class=" card" style="width: 18rem; text-align: center; font-family: Merriweather;font-size: 22px; margin-left: 30%; margin-top: 1%;">
         <div class="card-body">
           <p class="card-text"><a class="nav-link" href="{% url 'players_regi' %}">Players Registration</a></p>
         
 
         </div>
       </div>
+      <div >
+        <h2 style="font-family: Merriweather;  margin-left: 30%;">important dates</h2>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th >EVENT</th>
+              <th >Start Date</th>
+              <th >End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for Events in ImportantDate %}
+              <tr>
+                <td>{{Events.EVENT}}</td>
+                <td>{{Events.Start_Date }} {{ Events.Start_Time }}</td>
+                <td>{{Events.End_Date}} {{ Events.End_Time }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <div>
-        <p style="font-family: Merriweather;font-size: 22px;">Highlights</p>
+        <p style="font-family: Merriweather;font-size: 22px;">Matches Videos</p>
 
       </div>
       

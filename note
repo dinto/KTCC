@@ -1,7 +1,21 @@
-1)team user uniqueness required
+instructions:
+1)once team click start  bid then team will be inside bid competition
+
+check/testing:
+1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
+2)delete of foreign field working or not 
+
+work:
+1)team user uniqueness required when create team
 2)whenever players registration going on login button for team is hide (inform to them)
-3)once team click start  bid then team will be inside bid competition
-4)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
+3)schedule database
+4)video link adding database and latest video is above
+5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
+6)malayalam instruction
+7)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
+8)sold & unsold concept building
+9)pagination
+10)pdf work
 
 
 
@@ -29,3 +43,50 @@ remove that player from bid_bucket
 
 logic: team can't reduce bid point
 team add next bid point
+
+
+rules:
+player registration in particular time period
+team points :50000
+base value :1000
+
+1000 to 3000 = 200 each adding
+3000 to 10000 = 500 each
+10000 above =1000 each 
+
+icon player = 10000 hence maximum point become 40000
+icon player before bid date
+
+
+
+
+swap player if any required
+minimum players 15
+
+if 15 members in 1 team then admin can disallow for biding 
+
+10 over each 
+
+
+==============
+https://www.youtube.com/watch?v=N-PB-HMFmdo
+from django.core.paginator import Paginator 
+
+models=
+p = Paginator(models,2)
+page = request.GET.get('page')
+venues = p.get_page(page)
+
+inside context {'':---,'venues':venues}
+
+inside template {{venues}}
+
+
+{% if venues.has_previous %}
+<a href="?page=1">&laquo First</a>
+<a href="?page={{
+venues.previous_page_number
+}}"> Previous</a>
+{% endif %}
+
+Page {{ venues.number}} of {{ venues.paginator.num_pages }}
