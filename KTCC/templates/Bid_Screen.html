@@ -48,10 +48,13 @@
     </div>
      
    </div>
+   <br/>
+   <form action="{% url 'Bid_Screen' %}" method="POST">
+    <a href="" class="btn btn-primary " style="text-align: center; margin-left: 45%;">Start Bid For Team</a> 
+   </form>
    {% endfor %}
    <br/>
 
-<form action="{% url 'Bid_Screen' %}" method="POST">
-    <a href="" class="btn btn-primary " style="text-align: center; margin-left: 45%;">Start Bid For Team</a> 
+
 
 {% endblock content %}

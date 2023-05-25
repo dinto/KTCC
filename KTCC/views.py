@@ -9,6 +9,12 @@ from .forms import CreateTeam
 from KTCC.models import TeamInfo
 from KTCC.models import Bid_Bucket
 from random import randint
+from reportlab.pdfgen import canvas  
+from django.http import HttpResponse
+from django.http import FileResponse
+import io
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
 
 # Create your views here.
 
@@ -193,12 +199,12 @@ def Bid_Screen_new_Player(request):
             }
             return render(request, "Bid_screen_new_player.html",context)
         else:
-            random_object = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
+            random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
+            Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
+            random_object =Bid_Bucket.objects.filter(Current_player = True)
             context = {
             "random_object": random_object
             }
-            print("random_object",random_object)
-            Bid_Bucket.objects.filter(Player_name = random_object.Player_name).update(Current_player = True)
             return render(request, "Bid_screen_new_player.html",context)
     else:
         players= PlayerInfo.objects.all()
@@ -206,3 +212,54 @@ def Bid_Screen_new_Player(request):
             Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
             Bucket.save()
         return render(request, "Bid_screen_new_player.html")
+
+def getpdfs(request):  
+    response = HttpResponse(content_type='application/pdf')  
+    response['Content-Disposition'] = 'attachment; filename="file.pdf"'  
+    p = canvas.Canvas(response)  
+    p.setFont("Times-Roman", 55)  
+    p.drawString(100,700, "Hello, Javatpoint.")  
+    p.showPage()  
+    p.save()  
+    return response  
+
+
+def getpdfss(request):
+    buf=io.BytesIO()
+    c=canvas.Canvas(buf,pagesize=letter,bottomup=0)
+    c=canvas.Canvas(response)  
+    textob=c.beginText()
+    textob.setFont("Helvetica",14)
+    players= PlayerInfo.objects.all()
+    lines =[]
+    for player in players:
+        lines.append(player.name)
+        lines.append(player.name)
+    for line in lines:
+        textob.textLine(line)
+    c.drawText(textob)
+    c.showPage()
+    c.save
+    buf.seek(0)
+
+   # return response 
+    return FileResponse(buf,as_attachment=True,filename='ve.pdf')
+
+def getpdf(request):  
+    response = HttpResponse(content_type='application/pdf')  
+    response['Content-Disposition'] = 'attachment; filename="file.pdf"'  
+    p = canvas.Canvas(response)  
+    p.setFont("Times-Roman", 55)  
+    lines =[]
+    players= PlayerInfo.objects.all()
+    for player in players:
+        lines.append(player.name)
+      #  lines.append(player.name)
+    for line in lines:
+       # textob.textLine(line)
+       
+        p.drawString(100,700, line)  
+    #p.drawString(100,700, "Hello, Javatpoint.")  
+    p.showPage()  
+    p.save()  
+    return response  

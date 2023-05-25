@@ -17,6 +17,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('Bid_Screen/', views.Bid_Screen, name='Bid_Screen'),
     path('Bid_Screen_new_Player', views.Bid_Screen_new_Player, name='Bid_Screen_new_Player'),
+    path('pdf',views.getpdf), 
     
 
 ]
