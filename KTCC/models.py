@@ -154,6 +154,9 @@ class VideoLink(models.Model):
     Youtube_Link=models.CharField(max_length=700)
     Title_Name=models.CharField(max_length=200)
     Description=models.CharField(null=True,blank=True,max_length=700)
+    
+    def __str__(self):
+        return self.Title_Name
 
 class ImportantDate(models.Model):
     EVENT=models.CharField(max_length=700)

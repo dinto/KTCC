@@ -4,18 +4,16 @@ instructions:
 check/testing:
 1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
 2)delete of foreign field working or not 
+3)malayalam 
 
 work:
-1)team user uniqueness required when create team
+1)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
 2)whenever players registration going on login button for team is hide (inform to them)
 3)schedule database
-4)video link adding database and latest video is above
+4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
-6)malayalam instruction
-7)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
-8)sold & unsold concept building
-9)pagination
-10)pdf work
+6)sold & unsold concept building
+
 
 
 
@@ -68,25 +66,3 @@ if 15 members in 1 team then admin can disallow for biding
 10 over each 
 
 
-==============
-https://www.youtube.com/watch?v=N-PB-HMFmdo
-from django.core.paginator import Paginator 
-
-models=
-p = Paginator(models,2)
-page = request.GET.get('page')
-venues = p.get_page(page)
-
-inside context {'':---,'venues':venues}
-
-inside template {{venues}}
-
-
-{% if venues.has_previous %}
-<a href="?page=1">&laquo First</a>
-<a href="?page={{
-venues.previous_page_number
-}}"> Previous</a>
-{% endif %}
-
-Page {{ venues.number}} of {{ venues.paginator.num_pages }}

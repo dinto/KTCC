@@ -16,16 +16,29 @@ import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 from KTCC.models import ImportantDate
+from django.core.paginator import Paginator
+from KTCC.models import VideoLink
 
 # Create your views here.
 
 @login_required(login_url='login')
 def KTCC(request): 
-    return render(request,'index.html',{})
+    Important_Date = ImportantDate.objects.all()
+    Videos_models= VideoLink.objects.all().order_by('-id')
+    p = Paginator(Videos_models,3)
+    page = request.GET.get('page')
+    Videos = p.get_page(page)
+    nums = "a" * Videos.paginator.num_pages
+    return render(request,'index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
 
 def welcome(request): 
     Important_Date = ImportantDate.objects.all()
-    return render(request,'welcome.html',{'ImportantDate':Important_Date})
+    Videos_models= VideoLink.objects.all().order_by('-id')
+    p = Paginator(Videos_models,3)
+    page = request.GET.get('page')
+    Videos = p.get_page(page)
+    nums = "a" * Videos.paginator.num_pages
+    return render(request,'welcome.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
     #return render(request,'Teams.html',{})
 
 def Teams(request): 
@@ -104,8 +117,13 @@ def profile(request):
         forms = CreateTeam(request.POST, request.FILES)
         if forms.is_valid():
             forms.instance.Users = request.user
-            forms.save()
-            messages.success(request, 'Team Details Added Successfully')
+            #check user already create a team
+            Team=TeamInfo.objects.filter(Users = request.user)
+            if Team:
+                print("team already exist")
+            else:
+                forms.save()
+                messages.success(request, 'Team Details Added Successfully')
             return redirect("KTCC")
     
     else:
@@ -114,71 +132,6 @@ def profile(request):
         "forms": forms
     }
     return render(request, "profile.html", context)
-
-@login_required(login_url='login')
-def EditProfile(request):
-
-    if request.method == 'POST':
-
-        usern = request.user.username        
-        email = request.POST.get('id_email')
-        auth = request.POST.get('D_Auth')
-        chid = request.POST.get('D_ChID')
-        utyp = request.POST.get('U_Type')
-        loss = request.POST.get('N_Loss')
-
-        if loss == 'on':
-            flos = True
-        else:
-            flos = False
-
-        if usern is None:
-            messages.info(request, 'You must enter Username')
-            return redirect('edit_profile')
-
-        elif email is None:
-            messages.info(request, 'You must enter Email')
-            return redirect('edit_profile')
-
-        elif User.objects.filter(username=usern).exists():
-            messages.info(request, 'Username is already taken')
-            return redirect('edit_profile')
-
-        elif User.objects.filter(email=email).exists():
-            messages.info(request, 'Email is already Taken')
-            return redirect('edit_profile')
-
-        elif auth is None:
-            messages.info(request, 'Authentication Key Must be Entered')
-            return redirect('edit_profile')
-
-        elif chid is None:
-            messages.info(request, 'Channel ID Must be Entered')
-            return redirect('edit_profile')
-
-        elif UserAuthentication.objects.filter(D_Auth=auth).exists():
-            messages.info(request, 'Authentication key in Use')
-            return redirect('edit_profile')
-
-        else:
-            user = User.objects.get(username=user)
-            userauth_obj = UserAuthentication.objects.update(
-                U_User = user,
-                defaults = {
-                    "D_Auth": auth,
-                    "D_ChID": chid,
-                    "U_Type": utyp,
-                    "N_Loss": flos,
-                }
-            )
-            user_obj = User.objects.update(
-                defaults = {
-                "username": username,
-                "email": email
-                }
-            )
-
-    return render(request, 'registration/edit_profile.html')
 
 @login_required(login_url='login')
 def Bid_Screen(request): 
