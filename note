@@ -13,6 +13,7 @@ work:
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 6)sold & unsold concept building
+7) admin can lock bidding by team
 
 
 
@@ -64,5 +65,14 @@ minimum players 15
 if 15 members in 1 team then admin can disallow for biding 
 
 10 over each 
+
+
+===============================================
+Start Bid for team =>
+CurrentBid=> 
+Current_Bid_Point+ increment point  (increment point should be given structure)
+Team_Name => team update
+
+Admin can 
 
 
