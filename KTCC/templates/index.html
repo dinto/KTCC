@@ -10,24 +10,20 @@
         <div >
             <div class="card" style="width: 20rem;">
                 <p class="card-text">Join Auction for biding players while T-10 auction occurs</p>
-                <div class="card-body d-flex"> 
-                    
+                <div class="card-body d-flex">            
                     <div>
                         <a href="{% url 'Bid_Screen' %}" class="btn btn-primary" style="text-align: center;">Join Auction</a>
                     </div>
                     &nbsp;&nbsp;
                     <div >
                         <a href="#" class="btn btn-primary" style="text-align: center;">My Auction</a>
-                    </div>
-                    
-                   
+                    </div> 
                 </div>
             </div>
 
         </div>
         &nbsp;&nbsp;
         <div>
-           
             <div class="card" style="width: 9rem; ">
                 <div class="card-body">
                 <a href="{% url 'profile' %}" class="btn btn-primary" style="text-align: center;">Create Team</a>
@@ -40,16 +36,15 @@
                 </div>
             </div>
             {% endif %}
-
         </div>
     </div>
 
     <div class="row">
         <div >
-            <h2 style="font-family: Merriweather;  margin-left: 30%;">important dates</h2>
+            <h2 class="heading">important dates</h2>
             <table class="table table-hover table-bordered">
               <thead>
-                <tr>
+                <tr class="heading">
                   <th >EVENT</th>
                   <th >Start Date</th>
                   <th >End Date</th>
@@ -57,7 +52,7 @@
               </thead>
               <tbody>
                 {% for Events in ImportantDate %}
-                  <tr>
+                  <tr class="heading">
                     <td>{{Events.EVENT}}</td>
                     <td>{{Events.Start_Date }} {{ Events.Start_Time }}</td>
                     <td>{{Events.End_Date}} {{ Events.End_Time }}</td>
@@ -69,8 +64,8 @@
         
     </div>
     <div class="row">
-        <p style="font-family: Merriweather;font-size: 22px;">Matches Videos</p>
-        <div class="row">
+        <p style="font-size: 22px;" class="heading">Matches Videos</p>
+        
           {% for Match_Videos in Videos %}
           <div class="card" style="width: 360px;">
             <iframe class="embed-responsive-item"  width="360" height="315" src="{{Match_Videos.Youtube_Link}}" title="YouTube video player" 
@@ -82,7 +77,7 @@
           </div>
           &nbsp;
           {% endfor %}   
-        </div>
+        
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             {% if Videos.has_previous %}
@@ -99,8 +94,8 @@
           </ul>
         </nav>
 
-  </div>
     </div>
+</div>
 
 
 

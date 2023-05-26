@@ -11,10 +11,10 @@
     </div>
   </div>
   <div >
-    <h2 style="font-family: Merriweather;  margin-left: 30%;">important dates</h2>
+    <h2 class="heading" style=" margin-left: 30%;">important dates</h2>
     <table class="table table-hover table-bordered">
       <thead>
-        <tr>
+        <tr class="heading">
           <th >EVENT</th>
           <th >Start Date</th>
           <th >End Date</th>
@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         {% for Events in ImportantDate %}
-          <tr>
+          <tr class="heading">
             <td>{{Events.EVENT}}</td>
             <td>{{Events.Start_Date }} {{ Events.Start_Time }}</td>
             <td>{{Events.End_Date}} {{ Events.End_Time }}</td>
@@ -31,7 +31,7 @@
       </tbody>
     </table>
   </div>
-  <p style="font-family: Merriweather;font-size: 22px;">Matches Videos</p>
+  <p  class="heading" style="font-size: 22px;">Matches Videos</p>
   <div class="row">
     {% for Match_Videos in Videos %}
     <div class="card" style="width: 360px;">
