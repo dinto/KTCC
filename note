@@ -15,6 +15,28 @@ work:
 6)sold & unsold concept building
 7) admin can lock bidding by team
 
+8)REAUCTION of UNSOLD 
+9)messages not displaying 
+10)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
+11)Tournment details like youtube link ,facebook link,insta,phone ,email id  from database to base template
+12)home ground player option
+13) all bid entries for player add as history for looking for everybody 
+14)disable players registration button as well as link
+
+==========
+Team bid status:
+teamlogo 
+team name 
+No of players 
+remaining
+max 50000  
+============
+player bid status
+player pic ,
+name 
+bowling and batting style
+current team icon, name
+current bid point
 
 
 
