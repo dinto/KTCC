@@ -16,7 +16,7 @@ import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter 
 from django.core.paginator import Paginator
-from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate
+from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table
 
 # Create your views here.
 
@@ -122,6 +122,15 @@ def profile(request):
                 print("team already exist")
             else:
                 forms.save()
+                current_team =TeamInfo.objects.filter(Users = request.user.id)
+                Maximum_Bid_Point=Season.objects.filter(Season_Name=current_team[0].Season)
+                Available_Point_Table_details=Available_Point_Table.objects.create(
+                Available_Point=Maximum_Bid_Point[0].Maximum_Bid_Point,
+                Team_Name=current_team[0],
+                Season=current_team[0].Season
+                )
+                Available_Point_Table_details.save()
+                
                 messages.success(request, 'Team Details Added Successfully')
             return redirect("KTCC")
     
