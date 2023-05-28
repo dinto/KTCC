@@ -176,13 +176,15 @@ def Bid_Screen(request):
         context = {
             "random_object": random_object,
             "CurrentBid":CurrentBids,
-            "username":username
+            "username":username,
+            "Base_piont":Base_piont
         }
         return render(request, "Bid_Screen.html",context)
     context = {
         "random_object": random_object,
         "CurrentBid":CurrentBids,
-        "username":username
+        "username":username,
+        "Base_piont":Base_piont
     }
     return render(request, "Bid_Screen.html",context)
 
@@ -192,10 +194,14 @@ def Bid_Screen_new_Player(request):
     Bid_bucket_count=Bid_Bucket.objects.count()
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
+        Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
+        CurrentBids = CurrentBid.objects.all()
         if(current_bid_player_count>0):
             random_object =Bid_Bucket.objects.filter(Current_player = True)
             context = {
-                "random_object": random_object
+                "random_object": random_object,
+                "CurrentBid":CurrentBids,
+                "Base_piont":Base_piont
             }
             return render(request, "Bid_screen_new_player.html",context)
         else:
@@ -203,7 +209,9 @@ def Bid_Screen_new_Player(request):
             Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
             random_object =Bid_Bucket.objects.filter(Current_player = True)
             context = {
-            "random_object": random_object
+            "random_object": random_object,
+            "CurrentBid":CurrentBids,
+            "Base_piont":Base_piont
             }
             return render(request, "Bid_screen_new_player.html",context)
     else:
