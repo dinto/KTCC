@@ -159,16 +159,20 @@ def Bid_Screen(request):
                 incremental=CurrentBids[0].Current_Bid_Point+1000
             CurrentBid_details=CurrentBid.objects.filter(Player_name = random_object[0].Player_name)
             current_team =TeamInfo.objects.filter(Users = current_user.id)
-            CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
+            Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
+            if(Available_Point[0].Available_Point>=incremental):
+                CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
         else:
             current_team =TeamInfo.objects.filter(Users = current_user.id)
-            CurrentBid_details=CurrentBid.objects.create(
-                Player_name=random_object[0].Player_name,
-                Current_Bid_Point=Base_piont+200,
-                Team_Name=current_team[0],
-                Season=random_object[0].Season
-            )
-            CurrentBid_details.save()
+            Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
+            if(Available_Point[0].Available_Point>=1200):
+                CurrentBid_details=CurrentBid.objects.create(
+                    Player_name=random_object[0].Player_name,
+                    Current_Bid_Point=Base_piont+200,
+                    Team_Name=current_team[0],
+                    Season=random_object[0].Season
+                )
+                CurrentBid_details.save()
         context = {
             "random_object": random_object,
             "CurrentBid":CurrentBids,

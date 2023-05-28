@@ -133,8 +133,8 @@ class Available_Point_Table(models.Model):
     class Meta:
         unique_together = ["Team_Name","Season"]
 
-    def __str__(self):
-        return self.Team_Name
+#    def __str__(self):
+#        return self.Team_Name
 
 class Bid_Bucket(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)

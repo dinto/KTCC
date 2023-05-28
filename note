@@ -26,7 +26,7 @@ work:
 16) set up icon player
 17) instructions typing model if possible
 18)page not reloading  during start bid and bid increment
-
+#available_point only when modified at time of player sold,icon player selection
 availble point checking =<max point
 ==========
 Team bid status:
