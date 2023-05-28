@@ -6,11 +6,17 @@ class Season(models.Model):
     Season_Name=models.CharField(max_length=100)
     Maximum_Bid_Point= models.IntegerField()
     Base_Point_For_Player= models.IntegerField()
+    ICON_Player_Point= models.IntegerField()
     Maximum_Players_Per_Team =models.IntegerField()
     Minimum_Players_Per_Team =models.IntegerField()
     Winning_point=models.IntegerField()
     NR_point=models.IntegerField()
     Total_over_Per_Innings=models.IntegerField()
+    youtube_Link = models.CharField(null=True,blank=True,max_length=100)
+    facebook_Link= models.CharField(null=True,blank=True,max_length=100)
+    instagram_Link = models.CharField(null=True,blank=True,max_length=100)
+    phone_number=models.IntegerField() 
+    mail_id=models.EmailField(max_length=100)
     
     class Meta:
         verbose_name_plural = 'Season'
@@ -101,8 +107,8 @@ class CurrentBid(models.Model):
     class Meta:
         unique_together = ["Player_name","Season"]
 
-    def __str__(self):
-        return self.Player_name
+    #def __str__(self):
+    #    return self.Player_name
 
 class Bid_Details(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
@@ -153,7 +159,6 @@ class AUCTIONRULE(models.Model):
 class VideoLink(models.Model):
     Youtube_Link=models.CharField(max_length=700)
     Title_Name=models.CharField(max_length=200)
-    Description=models.CharField(null=True,blank=True,max_length=700)
     
     def __str__(self):
         return self.Title_Name

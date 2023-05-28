@@ -11,13 +11,12 @@ from KTCC.models import Bid_Bucket
 from random import randint
 from reportlab.pdfgen import canvas  
 from django.http import HttpResponse
-from django.http import FileResponse
+from django.http import FileResponse,HttpResponseRedirect
 import io
 from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
-from KTCC.models import ImportantDate
+from reportlab.lib.pagesizes import letter 
 from django.core.paginator import Paginator
-from KTCC.models import VideoLink
+from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate
 
 # Create your views here.
 
@@ -135,9 +134,42 @@ def profile(request):
 
 @login_required(login_url='login')
 def Bid_Screen(request): 
+    if request.user.is_authenticated:
+        username = request.user.username
     random_object =Bid_Bucket.objects.filter(Current_player = True)
+    CurrentBids = CurrentBid.objects.all()
+    Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
+    if request.method == "POST" and 'Increment' in request.POST: 
+        current_user = request.user
+        if(CurrentBids):
+            if(CurrentBids[0].Current_Bid_Point >= Base_piont and CurrentBids[0].Current_Bid_Point<3000):
+                incremental=CurrentBids[0].Current_Bid_Point+200
+            if(CurrentBids[0].Current_Bid_Point >= 3000 and CurrentBids[0].Current_Bid_Point<10000):
+                incremental=CurrentBids[0].Current_Bid_Point+500
+            if(CurrentBids[0].Current_Bid_Point >= 10000):
+                incremental=CurrentBids[0].Current_Bid_Point+1000
+            CurrentBid_details=CurrentBid.objects.filter(Player_name = random_object[0].Player_name)
+            current_team =TeamInfo.objects.filter(Users = current_user.id)
+            CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
+        else:
+            current_team =TeamInfo.objects.filter(Users = current_user.id)
+            CurrentBid_details=CurrentBid.objects.create(
+                Player_name=random_object[0].Player_name,
+                Current_Bid_Point=Base_piont+200,
+                Team_Name=current_team[0],
+                Season=random_object[0].Season
+            )
+            CurrentBid_details.save()
+        context = {
+            "random_object": random_object,
+            "CurrentBid":CurrentBids,
+            "username":username
+        }
+        return render(request, "Bid_Screen.html",context)
     context = {
-        "random_object": random_object
+        "random_object": random_object,
+        "CurrentBid":CurrentBids,
+        "username":username
     }
     return render(request, "Bid_Screen.html",context)
 
@@ -218,3 +250,7 @@ def getpdf(request):
     p.showPage()  
     p.save()  
     return response  
+
+def handle_not_found(request, exception):
+    print("her")
+    return render(request,'handle_not_found.html')

@@ -18,6 +18,7 @@ urlpatterns = [
     path('Bid_Screen/', views.Bid_Screen, name='Bid_Screen'),
     path('Bid_Screen_new_Player', views.Bid_Screen_new_Player, name='Bid_Screen_new_Player'),
     path('pdf',views.getpdf), 
-    
 
 ]
+
+handler404= 'KTCC.views.handle_not_found'

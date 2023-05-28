@@ -1,5 +1,6 @@
 instructions:
 1)once team click start  bid then team will be inside bid competition
+2) admin should add all team login from admin dashboard
 
 check/testing:
 1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
@@ -13,8 +14,7 @@ work:
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 6)sold & unsold concept building
-7) admin can lock bidding by team
-
+7)admin can lock bidding by team
 8)REAUCTION of UNSOLD 
 9)messages not displaying 
 10)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
@@ -22,7 +22,12 @@ work:
 12)home ground player option
 13) all bid entries for player add as history for looking for everybody 
 14)disable players registration button as well as link
+15) page not found setting 
+16) set up icon player
+17) instructions typing model if possible
+18)page not reloading  during start bid and bid increment
 
+availble point checking =<max point
 ==========
 Team bid status:
 teamlogo 
@@ -31,7 +36,7 @@ No of players
 remaining
 max 50000  
 ============
-player bid status
+player bid status:
 player pic ,
 name 
 bowling and batting style
@@ -91,6 +96,11 @@ if 15 members in 1 team then admin can disallow for biding
 
 ===============================================
 Start Bid for team =>
+CurrentBid=> 
+Current_Bid_Point+ increment point  (increment point should be given structure)
+Team_Name => team update
+
+increment bid =>
 CurrentBid=> 
 Current_Bid_Point+ increment point  (increment point should be given structure)
 Team_Name => team update
