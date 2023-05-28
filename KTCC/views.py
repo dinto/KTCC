@@ -220,7 +220,8 @@ def Bid_Screen_new_Player(request):
             Unsold_players.save()
             CurrentBids.delete()
             Bid_Bucket.objects.filter(Current_player = True).delete()
-
+    if request.method == "POST" and 'REAUCTION' in request.POST:
+        print("REAUCTION")
 
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
