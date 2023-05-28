@@ -13,7 +13,7 @@ work:
 3)schedule database
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
-6)sold & unsold concept building
+6)page not reloading  during start bid and bid increment
 7)admin can lock bidding by team
 8)REAUCTION of UNSOLD 
 9)messages not displaying 
@@ -25,9 +25,15 @@ work:
 15) page not found setting 
 16) set up icon player
 17) instructions typing model if possible
-18)page not reloading  during start bid and bid increment
+18)remove Current_player from bid details databse
 #available_point only when modified at time of player sold,icon player selection
-availble point checking =<max point
+
+work pending:
+set up icon player
+REAUCTION of UNSOLD 
+pdf work
+schedule database
+tab(bid and unbid )
 ==========
 Team bid status:
 teamlogo 
@@ -47,11 +53,8 @@ current bid point
 
 
 workflow:
-Start Bid -> Bid_Screen_new_Player
-next_player -> Bid_Screen_new_Player
 
 Bid_Screen_new_Player : bucket>0 ,if yes then current player true for random number else -> save playersinfo to bid player model and  current player is false
-
 bid screen : print all current player true
 
 

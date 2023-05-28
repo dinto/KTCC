@@ -96,10 +96,10 @@
 
 <br>
 
-    <form action="{% url 'Bid_Screen' %}" method="POST">
-        <a href="{% url 'Bid_Screen_new_Player' %}" class="btn btn-primary " style="text-align: center;  margin-left: 45%;">New Player</a> 
-        <a href="{% url 'Bid_Screen' %}" class="btn btn-success " style="text-align: center; ">Sold</a>
-        <a href="{% url 'Bid_Screen' %}" class="btn btn-danger " style="text-align: center;">UnSold</a>
+    <form action="{% url 'Bid_Screen_new_Player' %}" method="POST">
+        <button  type="submit" class="btn btn-primary " name="NewPlayer" style="text-align: center;  margin-left: 45%;">New Player</button> 
+        <button  type="submit" class="btn btn-success " name="Sold" style="text-align: center; ">Sold</button>
+        <button  type="submit" class="btn btn-danger " name="UnSold" style="text-align: center;">UnSold</button>
     </form>
 {% else %}
     <h2 class="text-center">admin can only see this page so login as admin</h2>

@@ -107,8 +107,8 @@ class CurrentBid(models.Model):
     class Meta:
         unique_together = ["Player_name","Season"]
 
-    #def __str__(self):
-    #    return self.Player_name
+  #  def __str__(self):
+  #      return self.Player_name or ''
 
 class Bid_Details(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
@@ -122,8 +122,16 @@ class Bid_Details(models.Model):
         unique_together = ["Player_name","Season"]
         verbose_name_plural = 'Bid Details'
 
-    def __str__(self):
-        return self.Player_name
+  #  def __str__(self):
+  #      return self.Player_name or ''
+class Unsold_player(models.Model):
+    Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
+    Status = models.CharField(max_length=100) #open or sold or unsold
+    Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["Player_name","Season"]
+
 
 class Available_Point_Table(models.Model):
     Team_Name = models.ForeignKey(TeamInfo, on_delete=models.CASCADE)

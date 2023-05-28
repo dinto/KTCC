@@ -16,7 +16,7 @@ import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter 
 from django.core.paginator import Paginator
-from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table
+from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player
 
 # Create your views here.
 
@@ -192,6 +192,36 @@ def Bid_Screen(request):
 @login_required(login_url='login')
 def Bid_Screen_new_Player(request): 
     Bid_bucket_count=Bid_Bucket.objects.count()
+    if request.method == "POST" and 'Sold' in request.POST: 
+        CurrentBids = CurrentBid.objects.all()
+        if(CurrentBid.objects.count()>0):     
+            Bid_Detail=Bid_Details.objects.create(
+                Player_name=CurrentBids[0].Player_name,
+                Status='Sold',
+                Sold_Point=CurrentBids[0].Current_Bid_Point,
+                Team_Name=CurrentBids[0].Team_Name,
+                Season=CurrentBids[0].Season
+                )
+            Bid_Detail.save()
+            Available_Point=Available_Point_Table.objects.filter(Team_Name=CurrentBids[0].Team_Name)
+            new_availablepoint=Available_Point[0].Available_Point-CurrentBids[0].Current_Bid_Point
+            Available_Point_Table.objects.filter(Team_Name=CurrentBids[0].Team_Name).update(Available_Point = new_availablepoint)
+            CurrentBids.delete()
+            Bid_Bucket.objects.filter(Current_player = True).delete()
+        
+    if request.method == "POST" and 'UnSold' in request.POST: 
+        CurrentBids = CurrentBid.objects.all()
+        if(CurrentBid.objects.count()>0):     
+            Unsold_players=Unsold_player.objects.create(
+                Player_name=CurrentBids[0].Player_name,
+                Status='UnSold',
+                Season=CurrentBids[0].Season
+                )
+            Unsold_players.save()
+            CurrentBids.delete()
+            Bid_Bucket.objects.filter(Current_player = True).delete()
+
+
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
         Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
