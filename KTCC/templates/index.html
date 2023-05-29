@@ -32,7 +32,9 @@
             {% if user.is_superuser %}
             <div class="card" style="width: 9rem; ">
                 <div class="card-body">
-                <a href="{% url 'Bid_Screen_new_Player' %}" class="btn btn-primary" style="text-align: center;">Start Bid</a>
+                <form action="{% url 'Bid_Screen_new_Player' %}" method="POST">
+                  <button  class="btn btn-primary " name="StartBid"   style="text-align: center;" type="submit">Start Bid</button>
+                </form>
                 </div>
             </div>
             {% endif %}

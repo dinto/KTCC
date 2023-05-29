@@ -9,14 +9,14 @@ class Season(models.Model):
     ICON_Player_Point= models.IntegerField()
     Maximum_Players_Per_Team =models.IntegerField()
     Minimum_Players_Per_Team =models.IntegerField()
-    Winning_point=models.IntegerField()
-    NR_point=models.IntegerField()
-    Total_over_Per_Innings=models.IntegerField()
     youtube_Link = models.CharField(null=True,blank=True,max_length=100)
     facebook_Link= models.CharField(null=True,blank=True,max_length=100)
     instagram_Link = models.CharField(null=True,blank=True,max_length=100)
     phone_number=models.IntegerField() 
     mail_id=models.EmailField(max_length=100)
+    Winning_point=models.IntegerField()
+    NR_point=models.IntegerField()
+    Total_over_Per_Innings=models.IntegerField()
     
     class Meta:
         verbose_name_plural = 'Season'
@@ -116,7 +116,7 @@ class Bid_Details(models.Model):
     Sold_Point = models.IntegerField(blank=True, null=True)
     Team_Name = models.ForeignKey(TeamInfo,on_delete=models.CASCADE)
     Season = models.ForeignKey(Season,  on_delete=models.CASCADE)
-    Current_player=models.BooleanField(default=False)
+    #Current_player=models.BooleanField(default=False)
 
     class Meta:
         unique_together = ["Player_name","Season"]

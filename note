@@ -8,32 +8,35 @@ check/testing:
 3)malayalam 
 
 work:
+not emergency work:
+1)Tournment details like youtube link ,facebook link,insta,phone ,email id  from database to base template
+2) page not found setting 
+3)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
+4)admin can lock bidding by team
+5)instructions typing model if possible
+
 1)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
-2)whenever players registration going on login button for team is hide (inform to them)
+2)messages not displaying 
 3)schedule database
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
-6)page not reloading  during start bid and bid increment
-7)admin can lock bidding by team
-8)REAUCTION of UNSOLD 
-9)messages not displaying 
-10)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
-11)Tournment details like youtube link ,facebook link,insta,phone ,email id  from database to base template
-12)home ground player option
-13) all bid entries for player add as history for looking for everybody 
-14)disable players registration button as well as link
-15) page not found setting 
-16) set up icon player
-17) instructions typing model if possible
-18)remove Current_player from bid details databse
+6)page not reloading  during start bid and bid increment (refresh bid screen)
+7)disable players registration button as well as link
+8)set up icon player
+9)home ground player option
+10)all bid entries for player add as history for looking for everybody 
 #available_point only when modified at time of player sold,icon player selection
+11)pdf for all instructions
+
+bucket players count for admin
+available_point for team login
 
 work pending:
-set up icon player
-REAUCTION of UNSOLD 
-pdf work
-schedule database
-tab(bid and unbid )
+1)tab(bid and unbid /reauction players)
+2)set up icon player
+3)pdf work
+4)schedule database
+
 ==========
 Team bid status:
 teamlogo 

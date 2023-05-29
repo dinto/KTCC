@@ -73,6 +73,9 @@ TEMPLATES = [
         },
     },
 ]
+#TEMPLATE_CONTEXT_PROCESSORS = (
+#    'app.context_processors.Season_Details',
+#)
 
 WSGI_APPLICATION = 'Kerala_Theaters_Cricket_club.wsgi.application'
 

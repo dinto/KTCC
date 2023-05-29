@@ -165,10 +165,10 @@ def Bid_Screen(request):
         else:
             current_team =TeamInfo.objects.filter(Users = current_user.id)
             Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
-            if(Available_Point[0].Available_Point>=1200):
+            if(Available_Point[0].Available_Point>=1000):
                 CurrentBid_details=CurrentBid.objects.create(
                     Player_name=random_object[0].Player_name,
-                    Current_Bid_Point=Base_piont+200,
+                    Current_Bid_Point=Base_piont,
                     Team_Name=current_team[0],
                     Season=random_object[0].Season
                 )
@@ -192,6 +192,13 @@ def Bid_Screen(request):
 @login_required(login_url='login')
 def Bid_Screen_new_Player(request): 
     Bid_bucket_count=Bid_Bucket.objects.count()
+    if request.method == "POST" and 'StartBid' in request.POST: 
+        Bid_bucket_count=Bid_Bucket.objects.count()
+        if(Bid_bucket_count<1):
+            players= PlayerInfo.objects.all()
+            for i in players:
+                Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
+                Bucket.save()
     if request.method == "POST" and 'Sold' in request.POST: 
         CurrentBids = CurrentBid.objects.all()
         if(CurrentBid.objects.count()>0):     
@@ -211,22 +218,31 @@ def Bid_Screen_new_Player(request):
         
     if request.method == "POST" and 'UnSold' in request.POST: 
         CurrentBids = CurrentBid.objects.all()
-        if(CurrentBid.objects.count()>0):     
+        if(CurrentBid.objects.count()<1):  
+            print("UnSold")   
+            Bid_Bucket_details=Bid_Bucket.objects.filter(Current_player = True)
             Unsold_players=Unsold_player.objects.create(
-                Player_name=CurrentBids[0].Player_name,
+                Player_name=Bid_Bucket_details[0].Player_name,
                 Status='UnSold',
-                Season=CurrentBids[0].Season
+                Season=Bid_Bucket_details[0].Season
                 )
             Unsold_players.save()
             CurrentBids.delete()
             Bid_Bucket.objects.filter(Current_player = True).delete()
     if request.method == "POST" and 'REAUCTION' in request.POST:
-        print("REAUCTION")
-
+        Bid_bucket_count=Bid_Bucket.objects.count()
+        if(Bid_bucket_count<1):
+            players= Unsold_player.objects.all()
+            for i in players:
+                Bucket=Bid_Bucket.objects.create(Player_name=i.Player_name,Status='REAUCTION',Season=i.Season,Current_player=False)
+                Bucket.save()
+            Unsold_player.objects.delete()
+    print("Bid_bucket_count",Bid_bucket_count)
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
         Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
         CurrentBids = CurrentBid.objects.all()
+        print("current_bid_player_count",current_bid_player_count)
         if(current_bid_player_count>0):
             random_object =Bid_Bucket.objects.filter(Current_player = True)
             context = {
@@ -236,21 +252,19 @@ def Bid_Screen_new_Player(request):
             }
             return render(request, "Bid_screen_new_player.html",context)
         else:
-            random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
-            Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
-            random_object =Bid_Bucket.objects.filter(Current_player = True)
-            context = {
-            "random_object": random_object,
-            "CurrentBid":CurrentBids,
-            "Base_piont":Base_piont
-            }
-            return render(request, "Bid_screen_new_player.html",context)
-    else:
-        players= PlayerInfo.objects.all()
-        for i in players:
-            Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
-            Bucket.save()
-        return render(request, "Bid_screen_new_player.html")
+            if request.method == "POST" and 'NewPlayer' in request.POST: 
+                print("NewPlayer")
+                random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
+                Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
+                random_object =Bid_Bucket.objects.filter(Current_player = True)
+                context = {
+                "random_object": random_object,
+                "CurrentBid":CurrentBids,
+                "Base_piont":Base_piont
+                }
+                return render(request, "Bid_screen_new_player.html",context)
+    return render(request, "Bid_screen_new_player.html")
+
 
 def getpdfs(request):  
     response = HttpResponse(content_type='application/pdf')  
@@ -306,3 +320,13 @@ def getpdf(request):
 def handle_not_found(request, exception):
     print("her")
     return render(request,'handle_not_found.html')
+
+#def Season_Details(request):
+#    return {'Season_Details': Season.objects.all()}
+def BidStatus(request):
+    Sold_Players = Bid_Details.objects.all()
+    context = {
+        "Sold_Players":Sold_Players
+    }
+    return render(request, "BidStatus.html",context)
+    
