@@ -40,7 +40,9 @@ def welcome(request):
 
 def Teams(request): 
     Teams= TeamInfo.objects.all()
-    return render(request,'Teams.html',{'Teams':Teams})
+    Remaining_Point=Available_Point_Table.objects.all()
+    #print(Remaining_Point)
+    return render(request,'Teams.html',{'Teams':Teams,'Remaining_Point':Remaining_Point})
 
 def Players(request): 
     players= PlayerInfo.objects.all()
@@ -145,6 +147,11 @@ def profile(request):
 def Bid_Screen(request): 
     if request.user.is_authenticated:
         username = request.user.username
+        logged_team =TeamInfo.objects.filter(Users =  request.user.id)
+        if request.user.is_superuser:
+            Remaining_Point= 0
+        else:
+            Remaining_Point=Available_Point_Table.objects.filter(Team_Name=logged_team[0])[0]
     random_object =Bid_Bucket.objects.filter(Current_player = True)
     CurrentBids = CurrentBid.objects.all()
     Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
@@ -177,14 +184,16 @@ def Bid_Screen(request):
             "random_object": random_object,
             "CurrentBid":CurrentBids,
             "username":username,
-            "Base_piont":Base_piont
+            "Base_piont":Base_piont,
+            "Remaining_Point":Remaining_Point
         }
         return render(request, "Bid_Screen.html",context)
     context = {
         "random_object": random_object,
         "CurrentBid":CurrentBids,
         "username":username,
-        "Base_piont":Base_piont
+        "Base_piont":Base_piont,
+        "Remaining_Point":Remaining_Point
     }
     return render(request, "Bid_Screen.html",context)
 
