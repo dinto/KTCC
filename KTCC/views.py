@@ -239,33 +239,36 @@ def Bid_Screen_new_Player(request):
                 instance = Unsold_player.objects.get(Player_name=i.Player_name)
                 instance.delete()
 
-    print("Bid_bucket_count",Bid_bucket_count)
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
         Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
         CurrentBids = CurrentBid.objects.all()
-        print("current_bid_player_count",current_bid_player_count)
         if(current_bid_player_count>0):
             random_object =Bid_Bucket.objects.filter(Current_player = True)
             context = {
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
-                "Base_piont":Base_piont
+                "Base_piont":Base_piont,
+                "Bid_bucket_count":Bid_bucket_count
             }
             return render(request, "Bid_screen_new_player.html",context)
         else:
             if request.method == "POST" and 'NewPlayer' in request.POST: 
-                print("NewPlayer")
                 random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
                 Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
                 random_object =Bid_Bucket.objects.filter(Current_player = True)
                 context = {
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
-                "Base_piont":Base_piont
+                "Base_piont":Base_piont,
+                "Bid_bucket_count":Bid_bucket_count
                 }
                 return render(request, "Bid_screen_new_player.html",context)
-    return render(request, "Bid_screen_new_player.html")
+    context = {
+    "Base_piont":Base_piont,
+    "Bid_bucket_count":Bid_bucket_count
+    }
+    return render(request, "Bid_screen_new_player.html",context)
 
 
 def getpdfs(request):  
