@@ -52,29 +52,11 @@ team add next bid point
 
 rules:
 player registration in particular time period
-team points :50000
-base value :1000
-
 icon player = 10000 hence maximum point become 40000
 icon player before bid date
-
 swap player if any required
 minimum players 15
-
 if 15 members in 1 team then admin can disallow for biding 
 
-
-===============================================
-Start Bid for team =>
-CurrentBid=> 
-Current_Bid_Point+ increment point  (increment point should be given structure)
-Team_Name => team update
-
-increment bid =>
-CurrentBid=> 
-Current_Bid_Point+ increment point  (increment point should be given structure)
-Team_Name => team update
-
-Admin can 
 
 
