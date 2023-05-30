@@ -17,25 +17,23 @@ not emergency work:
 
 1)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
 2)messages not displaying 
-3)schedule database
+3)all bid entries for player add as history for looking for everybody 
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 6)page not reloading  during start bid and bid increment (refresh bid screen)
 7)disable players registration button as well as link
 8)set up icon player
 9)home ground player option
-10)all bid entries for player add as history for looking for everybody 
 #available_point only when modified at time of player sold,icon player selection
-11)pdf for all instructions
 
 bucket players count for admin
 available_point for team login
+Players details in team and available_point
 
 work pending:
 1)tab(bid and unbid /reauction players)
 2)set up icon player
 3)pdf work
-4)schedule database
 
 ==========
 Team bid status:

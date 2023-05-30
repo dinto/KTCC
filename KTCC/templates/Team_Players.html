@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br/>
+<br/><br/>
+
+<div class="heading text-center">
+    <span>
+        Batsman
+    </span>
+    <hr style="color: red;"/>
+    {% for Team in Team_players %}
+        {% if Team.Player_name.Role == 'Batsman' %}
+            {{Team.Player_name}}
+        {% endif %}
+    {% endfor%}
+    <span>
+        Batting Allrounder
+    </span>
+    <hr style="color: red;"/>
+    {% for Team in Team_players %}
+        {% if Team.Player_name.Role == 'Batting Allrounder' %}
+            {{Team.Player_name}}
+        {% endif %}
+    {% endfor%}
+    <span>
+        Wicket-Keeper
+    </span>
+    <hr style="color: red;"/>
+    {% for Team in Team_players %}
+        {% if Team.Player_name.Role == 'Wicket-Keeper' %}
+            {{Team.Player_name}}
+        {% endif %}
+    {% endfor%}
+    <span>
+        Bowling Allrounder
+    </span>
+    <hr style="color: red;"/>
+    {% for Team in Team_players %}
+        {% if Team.Player_name.Role == 'Bowling Allrounder' %}
+            {{Team.Player_name}}
+        {% endif %}
+    {% endfor%}
+    <span>
+        Bowler
+    </span>
+    <hr style="color: red;"/>
+    {% for Team in Team_players %}
+        {% if Team.Player_name.Role == 'Bowler' %}
+            {{Team.Player_name}}
+        {% endif %}
+    {% endfor%}
+
+</div>
+
+
+
+
+
+{% endblock content %}
+

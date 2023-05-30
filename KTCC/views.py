@@ -4,10 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreatePlayer
-from KTCC.models import PlayerInfo
 from .forms import CreateTeam
-from KTCC.models import TeamInfo
-from KTCC.models import Bid_Bucket
 from random import randint
 from reportlab.pdfgen import canvas  
 from django.http import HttpResponse
@@ -16,7 +13,8 @@ import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter 
 from django.core.paginator import Paginator
-from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player
+from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player,Schedule,TeamInfo,Bid_Bucket,PlayerInfo
+from reportlab.platypus import Image
 
 # Create your views here.
 
@@ -108,7 +106,9 @@ def Stats(request):
     return render(request,'Stats.html',{})
 
 def Matches(request): 
-    return render(request,'Matches.html',{})
+    
+    matches= Schedule.objects.all()
+    return render(request,'Matches.html',{'matches':matches})
 
 @login_required(login_url='login')
 def profile(request): 
@@ -236,7 +236,9 @@ def Bid_Screen_new_Player(request):
             for i in players:
                 Bucket=Bid_Bucket.objects.create(Player_name=i.Player_name,Status='REAUCTION',Season=i.Season,Current_player=False)
                 Bucket.save()
-            Unsold_player.objects.delete()
+                instance = Unsold_player.objects.get(Player_name=i.Player_name)
+                instance.delete()
+
     print("Bid_bucket_count",Bid_bucket_count)
     if(Bid_bucket_count>0):
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
@@ -304,6 +306,7 @@ def getpdf(request):
     p = canvas.Canvas(response)  
     p.setFont("Times-Roman", 55)  
     lines =[]
+    lines.append(Image('static/images/LogoT10.jpeg',2.2*inch,2.2*inch))
     players= PlayerInfo.objects.all()
     for player in players:
         lines.append(player.name)
@@ -329,4 +332,19 @@ def BidStatus(request):
         "Sold_Players":Sold_Players
     }
     return render(request, "BidStatus.html",context)
+
+def Team_players(request,id):
+    Team_name=TeamInfo.objects.get(id=id)
+    #print(Bid_Details.objects.filter(Team_Name=Team_name.id))
+    Team_players = Bid_Details.objects.filter(Team_Name=Team_name.id)
+    context = {
+        "Team_players":Team_players
+    }
+    return render(request, "Team_Players.html",context)
+def Icon_Player(request):
+    #Players = Bid_Details.objects.get()
+    #context = {
+    #    "Sold_Players":Sold_Players
+    #}
+    return render(request, "Icon_Player_selection.html")
     

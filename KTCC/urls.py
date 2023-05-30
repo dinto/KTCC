@@ -19,6 +19,8 @@ urlpatterns = [
     path('Bid_Screen_new_Player', views.Bid_Screen_new_Player, name='Bid_Screen_new_Player'),
     path('pdf',views.getpdf), 
     path('BidStatus', views.BidStatus, name='BidStatus'),
+    path('Teams/<int:id>',views.Team_players, name='Team_players'), 
+    path('Icon_Player',views.Icon_Player, name='Icon_Player'), 
 
 ]
 
