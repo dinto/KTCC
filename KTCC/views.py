@@ -15,6 +15,7 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player,Schedule,TeamInfo,Bid_Bucket,PlayerInfo
 from reportlab.platypus import Image
+from django.db.models import Q
 
 # Create your views here.
 
@@ -46,6 +47,12 @@ def Teams(request):
 
 def Players(request): 
     players= PlayerInfo.objects.all()
+    if request.method == "GET" and 'search' in request.GET: 
+        query =request.GET.get('query')
+        if query:
+            #search=PlayerInfo.objects.filter(name__icontains=query)
+            search=PlayerInfo.objects.filter(Q(name__icontains=query) | Q(Role__icontains=query) | Q(Batting_style__icontains=query) | Q(Bowling_style__icontains=query))
+            return render(request,'Players.html',{'players':search})    
     return render(request,'Players.html',{'players':players})
 
 def SignupPage(request):
@@ -339,6 +346,15 @@ def handle_not_found(request, exception):
 #    return {'Season_Details': Season.objects.all()}
 def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
+    if request.method == "GET" and 'search' in request.GET: 
+        query =request.GET.get('query')
+        print("query",query)
+        if query:
+            search=Bid_Details.objects.filter(Player_name__name__icontains=query)
+            context = {
+                "Sold_Players":search
+            }
+            return render(request, "BidStatus.html",context)
     context = {
         "Sold_Players":Sold_Players
     }

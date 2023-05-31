@@ -46,6 +46,24 @@
 <br/>
 <br/>
 <h2 class="heading" style="text-align: center;">Registered Players</h2>
+<div class="container-fluid">
+  <form class="form-inline my-2 my-lg-0"  action="{% url 'Players' %}" method="GET">
+    <div class="row">
+      <div class="col-8">
+        <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search" aria-label="Search">
+
+      </div>
+      <div class="col-4">
+        <button class="btn btn-outline-success my-2 my-sm-0" name="search" type="submit">Search</button>
+      </div>
+      
+
+    </div>
+   
+   
+  </form>
+<br>
+
 
 <div class="container d-flex " style="align-items: left;">
     {% for players_list in players %}
@@ -100,4 +118,5 @@
 
    
   </div>
+</div>
 {% endblock content %}

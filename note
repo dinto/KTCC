@@ -15,25 +15,22 @@ not emergency work:
 3)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
 4)admin can lock bidding by team
 5)instructions typing model if possible
+6)all bid entries for player add as history for looking for everybody 
 
-1)all bid players  like tab(bid and unbid ) & search option in both  search option in registred players ,filter or sort
+1)disable players registration button as well as link
 2)messages not displaying 
-3)all bid entries for player add as history for looking for everybody 
+3)home ground player option
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 6)page not reloading  during start bid and bid increment (refresh bid screen)
-7)disable players registration button as well as link
-8)home ground player option
 
-Players details in team and available_point
 
 work pending:
 1)tab(bid and unbid /reauction players)
 2)hosting part
 3)pdf work
-4)search and filter
-5)mobile view
-6)design work
+4)design work & mobile view
+
 
 ==========
 Team bid status:

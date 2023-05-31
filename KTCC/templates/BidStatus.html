@@ -71,16 +71,31 @@
 <!-- Tabs content -->
 <div class="tab-content" id="ex2-content">
   <div  class="tab-pane fade show active"  id="ex3-tabs-1"  role="tabpanel"  aria-labelledby="ex3-tab-1">
-    bowling and batting style
+    <form class="form-inline my-2 my-lg-0"  action="{% url 'BidStatus' %}" method="GET">
+      <div class="row">
+        <div class="col-8">
+          <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search" aria-label="Search">
+  
+        </div>
+        <div class="col-4">
+          <button class="btn btn-outline-success my-2 my-sm-0" name="search" type="submit">Search</button>
+        </div>
+        
+  
+      </div>
+     
+     
+    </form>
   
     {% for Sold_Player in Sold_Players %}
-    <div class="card" style="width: 22rem; margin: 10px"  id="image_container">
+    <div class="card" style="width: 24rem; margin: 10px"  id="image_container">
       <div class="row">
           <div class="col-6">
               <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" class="player" >
-              <h1 class="card-title">{{ Sold_Player.Player_name.name }}</h1>
+              
           </div>
           <div class="col-6">   
+            <h1 class="card-title">{{ Sold_Player.Player_name.name }}</h1>
             <p class="card-text"> {{ Sold_Player.Player_name.Batting_style }}</p>
             <p class="card-text"> {{ Sold_Player.Player_name.Bowling_style }}</p>
           </div>

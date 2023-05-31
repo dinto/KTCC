@@ -19,15 +19,10 @@
             </p>
             
             <a href="{% url 'Team_players' Team.id %}">Players</a>
-            {% for Remaining_Points in Remaining_Point %}
-            {{Remaining_Points.Team_Name}}
-            
-            {%if Remaining_Points.Team_Name == Team.Team_Name%}
-            
-            <span style="color: red;">Remaining Point: {{Remaining_Points.Available_Point}}</span>
-            {% endif %}
-            
-
+            {% for Remaining_Points in Remaining_Point %}           
+                {%if Remaining_Points.Team_Name.id == Team.id %}
+                <span style="color: red;">Remaining Point: {{Remaining_Points.Available_Point}}</span>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
