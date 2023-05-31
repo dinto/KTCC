@@ -23,15 +23,17 @@ not emergency work:
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 6)page not reloading  during start bid and bid increment (refresh bid screen)
 7)disable players registration button as well as link
-8)set up icon player #available_point only when modified at time of player sold,icon player selection
-9)home ground player option
+8)home ground player option
 
 Players details in team and available_point
 
 work pending:
 1)tab(bid and unbid /reauction players)
-2)set up icon player
+2)hosting part
 3)pdf work
+4)search and filter
+5)mobile view
+6)design work
 
 ==========
 Team bid status:

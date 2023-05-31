@@ -7,6 +7,7 @@ class CreatePlayer(forms.ModelForm):
 
     class Meta:
         model = PlayerInfo
+        exclude = ("is_home_ground_player", "is_icon_player", )
         fields = '__all__'
         widgets ={
             'dob': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),

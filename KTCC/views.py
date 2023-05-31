@@ -204,7 +204,7 @@ def Bid_Screen_new_Player(request):
     if request.method == "POST" and 'StartBid' in request.POST: 
         Bid_bucket_count=Bid_Bucket.objects.count()
         if(Bid_bucket_count<1):
-            players= PlayerInfo.objects.all()
+            players= PlayerInfo.objects.filter(is_icon_player=False).all()
             for i in players:
                 Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
                 Bucket.save()
@@ -274,7 +274,6 @@ def Bid_Screen_new_Player(request):
                 }
                 return render(request, "Bid_screen_new_player.html",context)
     context = {
-    "Base_piont":Base_piont,
     "Bid_bucket_count":Bid_bucket_count
     }
     return render(request, "Bid_screen_new_player.html",context)
