@@ -16,6 +16,8 @@ from django.core.paginator import Paginator
 from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player,Schedule,TeamInfo,Bid_Bucket,PlayerInfo
 from reportlab.platypus import Image
 from django.db.models import Q
+from django.template import loader 
+from .utils import mobileBrowser
 
 # Create your views here.
 
@@ -27,7 +29,18 @@ def KTCC(request):
     page = request.GET.get('page')
     Videos = p.get_page(page)
     nums = "a" * Videos.paginator.num_pages
-    return render(request,'index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
+    if mobileBrowser (request):
+	    t = loader.get_template('m_index.html') 
+    else:
+	    t = loader.get_template('index.html') 
+    context = {
+        'ImportantDate':Important_Date,
+        'Videos':Videos,
+        'nums':nums
+    }
+    return HttpResponse(t.render(context))
+
+    #return render(request,'index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
 
 def welcome(request): 
     Important_Date = ImportantDate.objects.all()
