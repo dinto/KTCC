@@ -346,17 +346,27 @@ def handle_not_found(request, exception):
 #    return {'Season_Details': Season.objects.all()}
 def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
+    Unsold_players = Unsold_player.objects.all()
     if request.method == "GET" and 'search' in request.GET: 
         query =request.GET.get('query')
-        print("query",query)
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
             context = {
                 "Sold_Players":search
             }
             return render(request, "BidStatus.html",context)
+    if request.method == "GET" and 'search_unsold' in request.GET: 
+        query =request.GET.get('query_unsold')
+        if query:
+            search=Unsold_player.objects.filter(Player_name__name__icontains=query)
+            context = {
+                "UnSold_Players":search
+            }
+            return render(request, "BidStatus.html",context)
+
     context = {
-        "Sold_Players":Sold_Players
+        "Sold_Players":Sold_Players,
+        "Unsold_players":Unsold_players
     }
     return render(request, "BidStatus.html",context)
 
