@@ -19,17 +19,15 @@ not emergency work:
 
 1)disable players registration button as well as link
 2)messages not displaying 
-3)home ground player option
+3)page not reloading  during start bid and bid increment (refresh bid screen)
 4)pdf work
 5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
-6)page not reloading  during start bid and bid increment (refresh bid screen)
-
+6)my team
 
 work pending:
-1)tab(bid and unbid /reauction players)
+1)design work & mobile view
 2)hosting part
 3)pdf work
-4)design work & mobile view
 
 
 ==========

@@ -10,7 +10,12 @@
 <div class="row">
   <div class="col-6">
     {% for Current_Bidding_Player in random_object %}
-  <div class="card" style="margin-left: 30%;">
+      {% if Current_Bidding_Player.Player_name.is_home_ground_player %}  
+  <div class="card" style="margin-left: 30%; background-color: rgb(204, 124, 200);">
+    {% else %}
+    <div class="card" style="margin-left: 30%;  background-color:  #04e1e9;">
+    {% endif %}
+    
     <div class="upper">
       <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
     </div>
@@ -47,7 +52,16 @@
         <div class="col-6" style="text-align: left; color: #3e0bcc;">
             {{ Current_Bidding_Player.Player_name.Bowling_style }}
         </div>
-      </div>              
+      </div>  
+      {% if Current_Bidding_Player.Player_name.is_home_ground_player %}  
+      <br>
+      <div class="row">
+        
+        <div style="text-align: center; color: #3e0bcc;">
+            Home Ground Player 
+        </div>
+      </div>   
+      {% endif %}         
     </div>
      
    </div>
