@@ -71,13 +71,15 @@ class PlayerInfo(models.Model):
     #aadharcard_img = models.ImageField(null=True,blank=True, upload_to='aadharcard/')
     aadharcard = models.FileField(upload_to='aadharcard/')
     Profile_Pic = models.ImageField(null=True,blank=True, upload_to='Profile_Pic/')
+    is_home_ground_player=models.BooleanField(default=False)
+    is_icon_player=models.BooleanField(default=False)
 
     class Meta:
         unique_together = ["mail_id","Season"]
         verbose_name_plural = 'Player List'
 
     def __str__(self):
-        return self.name
+        return self.name + '   ' +self.mail_id 
 
 
 class TeamInfo(models.Model):
@@ -107,8 +109,8 @@ class CurrentBid(models.Model):
     class Meta:
         unique_together = ["Player_name","Season"]
 
-  #  def __str__(self):
-  #      return self.Player_name or ''
+    def __str__(self):
+        return str(self.Player_name)
 
 class Bid_Details(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
@@ -122,8 +124,10 @@ class Bid_Details(models.Model):
         unique_together = ["Player_name","Season"]
         verbose_name_plural = 'Bid Details'
 
-  #  def __str__(self):
-  #      return self.Player_name or ''
+    def __str__(self):
+        if self.Player_name==None:
+            return "ERROR-Player_name IS NULL"
+        return str(self.Player_name)
 class Unsold_player(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
     Status = models.CharField(max_length=100) #open or sold or unsold
@@ -141,8 +145,8 @@ class Available_Point_Table(models.Model):
     class Meta:
         unique_together = ["Team_Name","Season"]
 
-#    def __str__(self):
-#        return self.Team_Name
+    def __str__(self):
+        return str(self.Team_Name)
 
 class Bid_Bucket(models.Model):
     Player_name = models.ForeignKey(PlayerInfo,  on_delete=models.CASCADE)
@@ -154,8 +158,8 @@ class Bid_Bucket(models.Model):
 
         verbose_name_plural = 'Bid Bucket'
 
-#    def __str__(self):
-#        return self.Player_name
+    def __str__(self):
+        return str(self.Player_name)
 
 class AUCTIONRULE(models.Model):
     Rules=models.CharField(max_length=700)

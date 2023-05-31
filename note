@@ -1,6 +1,7 @@
 instructions:
 1)once team click start  bid then team will be inside bid competition
 2) admin should add all team login from admin dashboard
+3)icon player = 10000 hence set maximum point become 40000  for particular team & icon player before bid date
 
 check/testing:
 1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
@@ -47,15 +48,9 @@ workflow:
 Bid_Screen_new_Player : bucket>0 ,if yes then current player true for random number else -> save playersinfo to bid player model and  current player is false
 bid screen : print all current player true
 
-team add next bid point
-
-
 rules:
 player registration in particular time period
-icon player = 10000 hence maximum point become 40000
-icon player before bid date
 swap player if any required
-minimum players 15
 if 15 members in 1 team then admin can disallow for biding 
 
 
