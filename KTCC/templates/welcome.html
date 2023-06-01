@@ -11,18 +11,18 @@
     </div>
   </div>
   <div >
-    <h2 class="heading" style=" margin-left: 30%;">important dates</h2>
+    <h2 class="heading" style="text-align: center;">Important Dates</h2>
     <table class="table table-hover table-bordered">
       <thead>
         <tr class="heading">
-          <th >EVENT</th>
+          <th >Event</th>
           <th >Start Date</th>
           <th >End Date</th>
         </tr>
       </thead>
       <tbody>
         {% for Events in ImportantDate %}
-          <tr class="heading">
+          <tr style="color: aliceblue;">
             <td>{{Events.EVENT}}</td>
             <td>{{Events.Start_Date }} {{ Events.Start_Time }}</td>
             <td>{{Events.End_Date}} {{ Events.End_Time }}</td>
@@ -31,11 +31,11 @@
       </tbody>
     </table>
   </div>
-  <p  class="heading" style="font-size: 22px;">Matches Videos</p>
+  <p style=" text-align: center;" class="heading">Match Videos</p>
   <div class="row">
     {% for Match_Videos in Videos %}
-    <div class="card" style="width: 360px;">
-      <iframe class="embed-responsive-item"  width="360" height="315" src="{{Match_Videos.Youtube_Link}}" title="YouTube video player" 
+    <div class="card" style="width: 360px; margin-left: 10px; margin-top: 5px;">
+      <iframe class="embed-responsive-item"  width="345" height="315" src="{{Match_Videos.Youtube_Link}}" title="YouTube video player" 
           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
       <div class="card-body">

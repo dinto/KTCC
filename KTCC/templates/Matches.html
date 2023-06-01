@@ -6,29 +6,33 @@
 <br/>
 <br/>
 <br/>
+<div class="container-fluid">
 <table class="table table-hover table-bordered">
     <thead>
       <tr class="heading">
-        <th scope="col">Match No</th>
-        <th scope="col">Team1</th>
-        <th scope="col">Team2</th>
-        <th scope="col">Date& Time</th>
+        <th scope="col">Match</th>
+        <th scope="col">Team</th>
+        <th scope="col">Team</th>
+        <th scope="col">Date&Time</th>
         <th scope="col">Venue</th>
         <th scope="col">Result</th>
       </tr>
     </thead>
     <tbody>
       {% for Schedule in matches %}
-      <tr class="heading">
+      <tr style="color: aliceblue;">
         <th  scope="row">{{Schedule.Match_Number}}</th>
         <td>{{Schedule.Team1_Name}}</td>
         <td>{{Schedule.Team2_Name}}</td>
         <td>{{Schedule.Date }} {{Schedule.Time }}</td>
         <td>{{Schedule.Venue}}</td>
-        <td>{{Schedule.Result}}</td>
+        {% if Schedule.Result%}
+          <td>{{Schedule.Result}}</td>
+        {% endif%}
       </tr>
       {% endfor %}
 
     </tbody>
   </table>
+</div>
 {% endblock content %}

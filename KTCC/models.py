@@ -195,6 +195,9 @@ class Schedule(models.Model):
     Time =models.CharField(null=True,blank=True,max_length=200) 
     Venue =models.CharField(null=True,blank=True,max_length=200) 
     Result =models.CharField(null=True,blank=True,max_length=200) 
+    
+    def __str__(self):
+        return  str(self.Match_Number)  
 
 class Pool_Master(models.Model):
     Pool_Name=models.CharField(max_length= 100)
