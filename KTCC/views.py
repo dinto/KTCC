@@ -203,7 +203,11 @@ def Bid_Screen(request):
             "Base_piont":Base_piont,
             "Remaining_Point":Remaining_Point
         }
-        return render(request, "Bid_Screen.html",context)
+        if mobileBrowser (request):
+            return render(request, "m_Bid_Screen.html",context)
+        else:
+            return render(request, "Bid_Screen.html",context)
+        
     context = {
         "random_object": random_object,
         "CurrentBid":CurrentBids,
@@ -211,7 +215,10 @@ def Bid_Screen(request):
         "Base_piont":Base_piont,
         "Remaining_Point":Remaining_Point
     }
-    return render(request, "Bid_Screen.html",context)
+    if mobileBrowser (request):
+        return render(request, "m_Bid_Screen.html",context)
+    else:
+        return render(request, "Bid_Screen.html",context)
 
 
 @login_required(login_url='login')

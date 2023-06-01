@@ -105,7 +105,7 @@
           <br>
           <div class="row">
             <div class="col-12" >
-              <img src="/static/{{CurrentBids.Team_Name.Team_Logo}}" width="80">
+              <img src="/static/{{CurrentBids.Team_Name.Team_Logo}}" style="border-radius: 20px;" width="80">
             </div>
           </div>  
           {% endfor %}            
@@ -113,12 +113,16 @@
       </div>
   </div>
 </div>
+{% if user.is_superuser %} 
+{% else%}
 <div class="row " style="margin-left: 50%;">
   <br/>
   <form action="{% url 'Bid_Screen' %}" method="POST">
    <button  class="btn btn-primary " name="Increment"   style="text-align: center; margin-left: 45%;" type="submit">Start/Increment Bid For Team</button>
   </form>
 </div>
+{% endif %}
+
    <br/>
 
 
