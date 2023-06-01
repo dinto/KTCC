@@ -55,14 +55,31 @@ def Teams(request):
         return render(request,'Teams.html',{'Teams':Teams,'Remaining_Point':Remaining_Point,'posts':posts})
 
 def Players(request): 
-    players= PlayerInfo.objects.all()
+   # players= PlayerInfo.objects.all()
+    Players_model= PlayerInfo.objects.all().order_by('-id')
+    p = Paginator(Players_model,3)
+    page = request.GET.get('page')
+    players_paginaton = p.get_page(page)
+    nums = "a" * players_paginaton.paginator.num_pages
+
     if request.method == "GET" and 'search' in request.GET: 
         query =request.GET.get('query')
         if query:
             #search=PlayerInfo.objects.filter(name__icontains=query)
             search=PlayerInfo.objects.filter(Q(name__icontains=query) | Q(Role__icontains=query) | Q(Batting_style__icontains=query) | Q(Bowling_style__icontains=query))
-            return render(request,'Players.html',{'players':search})    
-    return render(request,'Players.html',{'players':players})
+          #  return render(request,'Players.html',{'players':search})   
+            if mobileBrowser (request):
+                return render(request,'m_Players.html',{'players_paginaton':search,'nums':nums}) 
+            else:
+                return render(request,'Players.html',{'players_paginaton':search,'nums':nums}) 
+
+            #return render(request,'Players.html',{'players_paginaton':search,'nums':nums}) 
+   # return render(request,'Players.html',{'players':players,'players_paginaton':players_paginaton,'nums':nums})
+    if mobileBrowser (request):
+        return render(request,'m_Players.html',{'players_paginaton':players_paginaton,'nums':nums})
+    else:
+        return render(request,'Players.html',{'players_paginaton':players_paginaton,'nums':nums})
+    
 
 def SignupPage(request):
     if request.method=='POST':
