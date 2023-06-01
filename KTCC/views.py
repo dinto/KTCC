@@ -276,7 +276,10 @@ def Bid_Screen_new_Player(request):
                 "Base_piont":Base_piont,
                 "Bid_bucket_count":Bid_bucket_count
             }
-            return render(request, "Bid_screen_new_player.html",context)
+            if mobileBrowser (request):
+                return render(request, "m_Bid_screen_new_player.html",context)
+            else:
+                return render(request, "Bid_screen_new_player.html",context)
         else:
             if request.method == "POST" and 'NewPlayer' in request.POST: 
                 random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
@@ -288,11 +291,17 @@ def Bid_Screen_new_Player(request):
                 "Base_piont":Base_piont,
                 "Bid_bucket_count":Bid_bucket_count
                 }
-                return render(request, "Bid_screen_new_player.html",context)
+                if mobileBrowser (request):
+                    return render(request, "m_Bid_screen_new_player.html",context)
+                else:
+                    return render(request, "Bid_screen_new_player.html",context)
     context = {
     "Bid_bucket_count":Bid_bucket_count
     }
-    return render(request, "Bid_screen_new_player.html",context)
+    if mobileBrowser (request):
+        return render(request, "m_Bid_screen_new_player.html",context)
+    else:
+        return render(request, "Bid_screen_new_player.html",context)
 
 
 def getpdfs(request):  

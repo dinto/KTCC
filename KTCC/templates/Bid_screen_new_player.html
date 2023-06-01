@@ -8,7 +8,7 @@
 
 {% if user.is_superuser %} 
     <h2 class="text-center heading">Bid Screen</h2>
-    <div class="row">
+    <div class="row" style="font-family: merriweather; font-size: 22px;">
     <div class="col-6">
     {% for Current_Bidding_Player in random_object %}
         <div class="card" style="margin-left: 30%;">
@@ -21,7 +21,7 @@
             </div>
             </div>
             <div class="mt-5 text-center" >   
-            <h4 class="mb-0" style="color: #3e0bcc;"><b>{{ Current_Bidding_Player.Player_name.name }}</b></h4>
+            <h4 class="mb-0" style="color: #3e0bcc;font-family: merriweather; font-size: 28px;"><b>{{ Current_Bidding_Player.Player_name.name }}</b></h4>
             <div class="row">
                 <div class="col-6" style="text-align: right; color: #3e0bcc;">
                     Role :
@@ -100,7 +100,7 @@
         <button  type="submit" class="btn btn-primary " name="NewPlayer" style="text-align: center;  margin-left: 45%;">New Player</button> 
         <button  type="submit" class="btn btn-success " name="Sold" style="text-align: center; ">Sold</button>
         <button  type="submit" class="btn btn-danger " name="UnSold" style="text-align: center;">UnSold</button>
-        <button  type="submit" class="btn btn-default " name="REAUCTION" style="text-align: center;">REAUCTION of UNSOLD Players</button>
+        <button  type="submit" class="btn btn-warning " name="REAUCTION" style="text-align: center;">REAUCTION of UNSOLD Players</button>
         
     </form>
     

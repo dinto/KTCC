@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br/>
+<br/>
+<br/>
+
+{% if user.is_superuser %} 
+    <h2 class="text-center heading">Bid Screen</h2>
+    <div class="row" style="font-family: merriweather; font-size: 22px;">
+        <div class="col-12">
+        {% for Current_Bidding_Player in random_object %}
+            <div class="card" style="margin-left: 5px;">
+                <div class="upper">
+                <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
+                </div>
+                <div class="user text-center">
+                <div class="profile">
+                    <img src="/static/{{Current_Bidding_Player.Player_name.Profile_Pic}}" class="rounded-circle" width="80">
+                </div>
+                </div>
+                <div class="mt-5 text-center" >   
+                <h4 class="mb-0" style="color: #3e0bcc;font-family: merriweather; font-size: 28px;"><b>{{ Current_Bidding_Player.Player_name.name }}</b></h4>
+                <div class="row">
+                    <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                        Role :
+                    </div>
+                    <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                        {{ Current_Bidding_Player.Player_name.Role }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                        Batting style :
+                    </div>
+                    <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                        {{ Current_Bidding_Player.Player_name.Batting_style }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                        Bowling style :
+                    </div>
+                    <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                        {{ Current_Bidding_Player.Player_name.Bowling_style }}
+                    </div>
+                </div>              
+                </div>  
+            </div>
+            <br/>
+        {% endfor %}
+        </div>
+    
+    </div>
+
+
+    <div class="row" style="font-family: merriweather; font-size: 22px; margin-left: 1px;">
+        <div class="col-11">
+            <div class="card">
+            <div class="upper">
+                <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
+            </div>
+            <div class="mt-5 text-center" > 
+                <div class="row">
+                <div class="col-7" style="text-align: right; color: #3e0bcc;">
+                    Base Point :
+                </div>
+                <div class="col-5" style="text-align: left; color: #3e0bcc;">
+                    {{Base_piont}}
+                </div>
+                </div>
+                {% for CurrentBids in CurrentBid %}
+                <div class="row">
+                <div class="col-7" style="text-align: right; color: #3e0bcc;">
+                    Current Bid Point :
+                </div>
+                <div class="col-5" style="text-align: left; color: #3e0bcc;">
+                    {{ CurrentBids.Current_Bid_Point }}
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-7" style="text-align: right; color: #3e0bcc;">
+                    Team Name :
+                </div>
+                <div class="col-5" style="text-align: left; color: #3e0bcc;">
+                    {{ CurrentBids.Team_Name }}
+                </div>
+                </div>  
+                <br>
+                <div class="row">
+                <div class="col-12" >
+                    <img src="/static/{{CurrentBids.Team_Name.Team_Logo}}" style="border-radius: 20px;" width="80">
+                </div>
+                </div>  
+                {% endfor %}            
+            </div>  
+            </div>
+        </div>
+    </div>
+
+<br>
+
+    <form action="{% url 'Bid_Screen_new_Player' %}" method="POST">
+        <button  type="submit" class="btn btn-primary " name="NewPlayer" style="text-align: center;  margin-left: 10px;">New Player</button> 
+        <button  type="submit" class="btn btn-success " name="Sold" style="text-align: center; ">Sold</button>
+        <button  type="submit" class="btn btn-danger " name="UnSold" style="text-align: center;">UnSold</button>
+    </form>
+    <form action="{% url 'Bid_Screen_new_Player' %}" method="POST">
+        <button  type="submit" class="btn btn-warning " name="REAUCTION" style="text-align: center; margin: 10px;">REAUCTION of UNSOLD Players</button>
+        
+    </form>
+    
+    <span class="heading">bucket players count: {{ Bid_bucket_count}} 
+    </span>
+
+{% else %}
+    <h2 class="text-center">admin can only see this page so login as admin</h2>
+{% endif %}
+{% endblock content %}
