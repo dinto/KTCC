@@ -30,17 +30,9 @@ def KTCC(request):
     Videos = p.get_page(page)
     nums = "a" * Videos.paginator.num_pages
     if mobileBrowser (request):
-	    t = loader.get_template('m_index.html') 
+        return render(request,'m_index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
     else:
-	    t = loader.get_template('index.html') 
-    context = {
-        'ImportantDate':Important_Date,
-        'Videos':Videos,
-        'nums':nums
-    }
-    return HttpResponse(t.render(context))
-
-    #return render(request,'index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
+        return render(request,'index.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
 
 def welcome(request): 
     Important_Date = ImportantDate.objects.all()
