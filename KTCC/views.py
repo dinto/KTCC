@@ -46,9 +46,13 @@ def welcome(request):
 
 def Teams(request): 
     Teams= TeamInfo.objects.all()
+    posts = list(TeamInfo.objects.all())
+    posts = [posts[i:i+2] for i in range(0, len(posts), 2)]
     Remaining_Point=Available_Point_Table.objects.all()
-    #print(Remaining_Point)
-    return render(request,'Teams.html',{'Teams':Teams,'Remaining_Point':Remaining_Point})
+    if mobileBrowser (request):
+        return render(request,'m_Teams.html',{'Teams':Teams,'Remaining_Point':Remaining_Point,'posts':posts})
+    else:
+        return render(request,'Teams.html',{'Teams':Teams,'Remaining_Point':Remaining_Point,'posts':posts})
 
 def Players(request): 
     players= PlayerInfo.objects.all()
