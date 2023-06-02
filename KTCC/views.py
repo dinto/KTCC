@@ -389,15 +389,25 @@ def handle_not_found(request, exception):
 def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
     Unsold_players = Unsold_player.objects.all()
-    posts_Bid_Details = list(Bid_Details.objects.all())
-    posts_Bid_Details = [posts_Bid_Details[i:i+2] for i in range(0, len(posts_Bid_Details), 4)]
+    posts_Bid_Details = list(Bid_Details.objects.all().order_by('-id'))
+    column_num=3
+    posts_Bid_Details = [posts_Bid_Details[i:i+column_num] for i in range(0, len(posts_Bid_Details), column_num)]
+    #Players_model= PlayerInfo.objects.all().order_by('-id')
+    p = Paginator(posts_Bid_Details,column_num*1)
+    page = request.GET.get('page')
+    sold_players_paginaton = p.get_page(page)
+    nums = "a" * sold_players_paginaton.paginator.num_pages
+
+
     if request.method == "GET" and 'search' in request.GET: 
         query =request.GET.get('query')
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
             context = {
                 "Sold_Players":search,
-                "posts_Bid_Details":posts_Bid_Details
+                "posts_Bid_Details":posts_Bid_Details,
+                "sold_players_paginaton":sold_players_paginaton,
+                "nums":nums
             }
             return render(request, "BidStatus.html",context)
     if request.method == "GET" and 'search_unsold' in request.GET: 
@@ -412,7 +422,10 @@ def BidStatus(request):
     context = {
         "Sold_Players":Sold_Players,
         "Unsold_players":Unsold_players,
-        "posts_Bid_Details":posts_Bid_Details
+        "posts_Bid_Details":posts_Bid_Details,
+        "sold_players_paginaton":sold_players_paginaton,
+        "nums":nums
+
     }
     return render(request, "BidStatus.html",context)
 

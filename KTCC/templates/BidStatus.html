@@ -86,17 +86,17 @@
      
      
     </form>
-{% for bid_Sold_Player in posts_Bid_Details %}
+{% for bid_Sold_Player in sold_players_paginaton %}
   <div class="row">
     {% for Sold_Player in bid_Sold_Player %}
     <div class="col-sm">
-    <div class="card" style="width: 24rem; margin: 10px"  id="image_container">
+    <div class="card" style=" margin: 10px"  id="image_container">
       <div class="row">
-          <div class="col-6">
+          <div class="col-4">
               <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" class="player" >
               
           </div>
-          <div class="col-6">   
+          <div class="col-8">   
             <h1 class="card-title">{{ Sold_Player.Player_name.name }}</h1>
             <p class="card-text"> {{ Sold_Player.Player_name.Batting_style }}</p>
             <p class="card-text"> {{ Sold_Player.Player_name.Bowling_style }}</p>
@@ -104,13 +104,13 @@
       </div>
       <div class="card-body" style="padding: 0px; background-color: #9999">   
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 {{ Sold_Player.Team_Name}}
                 <p class="card-text"> Bid point:{{ Sold_Player.Sold_Point }}</p>
 
             </div>
-            <div class="col-6">
-                <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}" class="team">
+            <div class="col-4">
+                <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}"  class="team ">
             </div>
         </div>
          
@@ -120,7 +120,24 @@
     {% endfor %}
   </div>
 </div>
+
 {% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if sold_players_paginaton.has_previous %}
+    <li class="page-item"><a href="?page=1"  class="page-link">&laquo First</a></li>
+    <li class="page-item"><a href="?page={{sold_players_paginaton.previous_page_number}}"  class="page-link"> Previous</a></li>
+    {% endif %}      
+    {% for i in nums %}
+     <li class="page-item"><a class="page-link" href="?page={{forloop.counter }}">{{forloop.counter}}</a></li>
+    {% endfor%}
+    {% if sold_players_paginaton.has_next %}
+    <li class="page-item"><a href="?page={{ sold_players_paginaton.next_page_number }}"  class="page-link"> Next</a></li>
+    <li class="page-item"><a href="?page={{ sold_players_paginaton.paginator.num_pages }}"  class="page-link">Last &raquo </a></li>
+    {% endif %}
+  </ul>
+</nav>
+
 <!-- Tab unsold players-->
 
   <div  class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
