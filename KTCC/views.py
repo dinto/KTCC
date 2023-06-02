@@ -389,12 +389,15 @@ def handle_not_found(request, exception):
 def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
     Unsold_players = Unsold_player.objects.all()
+    posts_Bid_Details = list(Bid_Details.objects.all())
+    posts_Bid_Details = [posts_Bid_Details[i:i+2] for i in range(0, len(posts_Bid_Details), 4)]
     if request.method == "GET" and 'search' in request.GET: 
         query =request.GET.get('query')
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
             context = {
-                "Sold_Players":search
+                "Sold_Players":search,
+                "posts_Bid_Details":posts_Bid_Details
             }
             return render(request, "BidStatus.html",context)
     if request.method == "GET" and 'search_unsold' in request.GET: 
@@ -408,7 +411,8 @@ def BidStatus(request):
 
     context = {
         "Sold_Players":Sold_Players,
-        "Unsold_players":Unsold_players
+        "Unsold_players":Unsold_players,
+        "posts_Bid_Details":posts_Bid_Details
     }
     return render(request, "BidStatus.html",context)
 
