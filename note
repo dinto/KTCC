@@ -52,3 +52,92 @@ if 15 members in 1 team then admin can disallow for biding
 
 
 
+=============================================
+aws ec2 configuration note:
+==========================================
+sudo apt-get update
+sudo apt-get upgrade
+enter for prompt screen
+
+clear
+python3 --version
+
+virtual env pack:
+
+sudo apt-get install python3-venv
+enter y then enter in prompt
+
+python3 -m venv virenv
+
+source virenv/bin/activate 
+git clone https://github.com/dinto/KTCC.git
+
+sudo apt-get install -y nginx
+enter in prompt
+
+pip install gunicorn
+pip list
+
+check nginx printing in 3.108.236.40 url
+
+install supervisor (it helps application running background smoothly)
+
+sudo apt-get install supervisor
+enter in prompt
+
+cd /etc/supervisor/conf.d/
+
+sudo touch gunicorn.conf
+
+sudo nano gunicorn.conf:
+
+
+
+[program:gunicorn]
+directory=/home/ubuntu/KTCC
+command=/home/ubuntu/virenv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/KTCC/app.spck  Kerala_Theaters_Cricket_club.wsgi:application
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/gunicorn/gunicorn.err.log
+stdout_logfile=/var/log/gunicorn/gunicorn.out.log
+[group:guni]
+programs:gunicorn
+
+
+to save clt+o 
+clt+ x to exit
+
+sudo mkdir /var/log/gunicorn
+
+sudo supervisorctl reread
+
+sudo supervisorctl  update
+sudo supervisorctl  status
+
+cd /etc/nginx
+sudo nano nginx.conf
+change user =>
+user=root; 
+
+
+cd sites-available
+sudo touch django.conf
+sudo nano django.conf
+
+server{
+	listen 80;
+      server_name 3.108.236.40;
+      location / {
+		include proxy_params;
+		proxy_pass http://unix:/home/ubuntu/KTCC/app.sock;
+      }
+
+}
+
+sudo nxinx -t
+sudo ln django.conf /etc/nginx/sites-enabled
+sudo service nginx restart
+
+
+
+
