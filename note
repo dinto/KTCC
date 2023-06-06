@@ -221,6 +221,15 @@ sudo ln django.conf /etc/nginx/sites-enabled
 sudo service nginx restart
 
 
+sudo iptables -F
+sudo service sshd restart
+sudo netstat -tnlp |grep :22
 
+sudo su
+cat /etc/resolv.conf
+nslookup amazon.com
 
+nano /etc/dhcp/dhclient.conf
+timeout 300;
+supersede domain-name-servers 8.8.8.8;
 =======
