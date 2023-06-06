@@ -52,6 +52,88 @@ if 15 members in 1 team then admin can disallow for biding
 
 
 
+https://www.youtube.com/watch?v=I5x8lAVQ8QQ
+
+vercel:
+both vercel.json & build_file.sh create inside root directory.
+
+========
+build_files.sh
+--------------
+pip install -r requirement.txt
+python3.10 manage.py collectstatic
+
+========
+vercel.json:
+------------------
+
+{
+    "builds": [{
+        "src": "Kerala_Theaters_Cricket_club/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    },
+    {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "staticfiles_build" }
+    }],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "Kerala_Theaters_Cricket_club/wsgi.py"
+        }
+    ]
+}
+
+========
+wsgi.py
+-----------
+app=application
+
+============
+settings
+----------
+STATICFILES_DIRS=os.path.join(BASE_DIR,'static'),
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles_build','static')
+
+DATABASES={
+ 'default':{
+'ENGINE':'django.db.backends.postgresql',
+'NAME':'',
+'USER':'',
+'PASSWORD':'',
+'HOST':'',
+'PORT':'6625',
+
+
+}
+
+}
+
+ALLOWED_HOSTS=['.now.sh','.vercel.app']
+#debug=false
+
+====================
+urls.py
+---------------
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+
+========================
+requirement.txt:
+..................
+remove below name:
+psycopg2
+
+
+
+
 =============================================
 aws ec2 configuration note:
 ==========================================
@@ -141,3 +223,4 @@ sudo service nginx restart
 
 
 
+=======
