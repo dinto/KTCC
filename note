@@ -177,7 +177,7 @@ sudo nano gunicorn.conf:
 
 [program:gunicorn]
 directory=/home/ubuntu/KTCC
-command=/home/ubuntu/virenv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/KTCC/app.spck  Kerala_Theaters_Cricket_club.wsgi:application
+command=/home/ubuntu/virenv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/KTCC/app.sock  Kerala_Theaters_Cricket_club.wsgi:application
 autostart=true
 autorestart=true
 stderr_logfile=/var/log/gunicorn/gunicorn.err.log
@@ -208,19 +208,28 @@ sudo nano django.conf
 
 server{
 	listen 80;
-      server_name 3.108.236.40;
+      server_name 3.108.236.40 www.ktccricket.in ktccricket.in;
       location / {
 		include proxy_params;
 		proxy_pass http://unix:/home/ubuntu/KTCC/app.sock;
       }
+      
+      location /static/{
+        autoindex on;
+        alias /home/ubuntu/KTCC/static/;
+      }
 
 }
 
-sudo nxinx -t
+
+
+sudo nginx -t
 sudo ln django.conf /etc/nginx/sites-enabled
 sudo service nginx restart
 
 
+#for error
+=======
 sudo iptables -F
 sudo service sshd restart
 sudo netstat -tnlp |grep :22
@@ -228,8 +237,61 @@ sudo netstat -tnlp |grep :22
 sudo su
 cat /etc/resolv.conf
 nslookup amazon.com
-
 nano /etc/dhcp/dhclient.conf
 timeout 300;
 supersede domain-name-servers 8.8.8.8;
 =======
+
+
+======================================
+How to Add Your Go Daddy Domain to AWS EC2 :
+==========================================
+https://www.youtube.com/watch?v=D5m5U79wj3Y
+
+search Route53
+
+hostedzones->create hostedzone->
+
+domain name: ktccricket.in
+select public hosted zone
+
+click create hosted zone
+
+hence it create NS and SOA 
+
+create record->
+A and cname:
+
+record type => A
+record name: 
+value => ipaddress of amazon instance (3.108.236.40)
+
+
+record name: www
+record type: cname
+value => ktccricket.in
+
+Note: we can either change Name server or A record..
+copy name server in NS  and copy to godaddy  ..copy all 4 and dnt use dot in end.
+godaddy A record value change to our aws ip address
+
+
+
+https://www.youtube.com/watch?v=vmMyuZSHt3c
+
+
+
+add rule for http,https and custom port 8000
+
+#gunicorn --bind 0.0.0.0:8000 Kerala_Theaters_Cricket_club.wsgi:application     (not using )
+
+sudo systemctl reload nginx
+
+
+==============
+https
+==============
+
+sudo apt-add-repository -r ppa:certbot/certbot
+sudo apt-het install python3-certbot-nginx
+sudo certbot --nginx -d 
