@@ -443,4 +443,24 @@ def Icon_Player(request):
     #    "Sold_Players":Sold_Players
     #}
     return render(request, "Icon_Player_selection.html")
-    
+
+def pdfGen(request):
+    buf=io.BytesIO()
+    c=canvas.Canvas(buf,pagesize=letter,bottomup=0) 
+    textob=c.beginText()
+    textob.setTextOrigin(inch,inch)
+    textob.setFont("Helvetica",14)
+    players= PlayerInfo.objects.all()
+    lines =[]
+    for player in players:
+        lines.append(player.name)
+        lines.append(player.phone_number)
+    for line in lines:
+        textob.textLine(line)
+    c.drawText(textob)
+    c.showPage()
+    c.save
+    buf.seek(0)
+
+   # return response 
+    return FileResponse(buf,as_attachment=True,filename='PlayersInfo.pdf')
