@@ -38,6 +38,8 @@ work pending:
 
 
 
+
+
 [icon player 10000 fixed so available point = 40000 once create icon player, remaining player =14 these two manual entry by admin]
 reserve point=(remaining player-1)*base point
 maximum bid point= available point- reserve point #for icon player 27000 non icon player= 360000
