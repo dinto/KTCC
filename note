@@ -6,7 +6,7 @@ instructions:
 check/testing:
 1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
 2)delete of foreign field working or not 
-3)malayalam 
+3)check if 300 players in view of bid status and player registration 
 
 work:
 not emergency work:
@@ -17,17 +17,37 @@ not emergency work:
 5)instructions typing model if possible
 6)all bid entries for player add as history for looking for everybody 
 
-1)disable players registration button as well as link
-2)messages not displaying 
-3)page not reloading  during start bid and bid increment (refresh bid screen)
-4)pdf work
-5)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
-6)my team
+
+1)messages not displaying 
+2)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
+
 
 work pending:
-1)design work & mobile view
-2)hosting part
-3)pdf work
+1)pdf work
+2)mobileview template missing problem
+3)reserve ad remaining players logic
+4)refresh button page not reloading  during start bid and bid increment (refresh bid screen) admin,and team both mobile and web view
+5)design part in my auction and team players 
+6)players registation buttion and team creation button ( button as well as link)enable and disable by admin  
+7)check if 300 players in view of bid status and player registration
+8)database change and backup 
+9)verify players aadharcard details
+10)once players bid over , once again click start bid it adding all players ..That is problem
+11)documents for team, admin database and admin in bid day
+
+
+
+[icon player 10000 fixed so available point = 40000 once create icon player, remaining player =14 these two manual entry by admin]
+reserve point=(remaining player-1)*base point
+maximum bid point= available point- reserve point #for icon player 27000 non icon player= 360000
+eg:
+if remaining player =2 , 1000 reserve, 
+maximum bid= 1500-1000=500
+inform this issue
+
+
+
+
 
 
 ==========
