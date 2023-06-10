@@ -111,7 +111,11 @@ def LoginPage(request):
            return redirect('login')
            # return HttpResponse ("Username or Password is incorrect!!!")
 
-    return render (request,'Authentication/login.html')
+    #return render (request,'Authentication/login.html')
+    if mobileBrowser (request):
+        return render (request,'Authentication/m_login.html')
+    else:
+        return render (request,'Authentication/login.html')
 
 def LogoutPage(request):
     logout(request)
