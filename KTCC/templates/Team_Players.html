@@ -12,43 +12,63 @@
     <hr style="color: red;"/>
     {% for Team in Team_players %}
         {% if Team.Player_name.Role == 'Batsman' %}
-            {{Team.Player_name}}
+
+            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
+            {{Team.Player_name.name}}
         {% endif %}
     {% endfor%}
+    <p>
+        <hr style="color: red;"/> 
+    </p>
     <span>
         Batting Allrounder
     </span>
     <hr style="color: red;"/>
     {% for Team in Team_players %}
         {% if Team.Player_name.Role == 'Batting Allrounder' %}
-            {{Team.Player_name}}
+            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
+            {{Team.Player_name.name}}
         {% endif %}
     {% endfor%}
+    <p>
+        <hr style="color: red;"/> 
+    </p>
     <span>
         Wicket-Keeper
     </span>
     <hr style="color: red;"/>
     {% for Team in Team_players %}
         {% if Team.Player_name.Role == 'Wicket-Keeper' %}
-            {{Team.Player_name}}
+            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
+            {{Team.Player_name.name}}
         {% endif %}
     {% endfor%}
+    <p>
+        <hr style="color: red;"/> 
+    </p>
     <span>
         Bowling Allrounder
     </span>
     <hr style="color: red;"/>
     {% for Team in Team_players %}
         {% if Team.Player_name.Role == 'Bowling Allrounder' %}
-            {{Team.Player_name}}
+        <div class="card d-flex" style="width: 10rem; float:left">
+            <img class=" rounded-circle" src="/static/{{Team.Player_name.Profile_Pic}}"  width=80 alt="  ">
+            {{Team.Player_name.name}}
+        </div>
         {% endif %}
     {% endfor%}
+    <p>
+        <hr style="color: red;"/> 
+    </p>
     <span>
         Bowler
     </span>
     <hr style="color: red;"/>
     {% for Team in Team_players %}
         {% if Team.Player_name.Role == 'Bowler' %}
-            {{Team.Player_name}}
+            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
+            {{Team.Player_name.name}}
         {% endif %}
     {% endfor%}
 

@@ -108,11 +108,17 @@
     </form>
     <form action="{% url 'Bid_Screen_new_Player' %}" method="POST">
         <button  type="submit" class="btn btn-warning " name="REAUCTION" style="text-align: center; margin: 10px;">REAUCTION of UNSOLD Players</button>
+        <button  type="submit" class="btn btn-info"  style="text-align: center;"><a href="{{ request.get_full_path }}">Reload</a></button>
         
     </form>
     
-    <span class="heading">bucket players count: {{ Bid_bucket_count}} 
-    </span>
+    <p class="heading">bucket players count: {{ Bid_bucket_count}} 
+    </p>
+    <p class="heading">Unsold players count: {{ Unsold_player_count}} 
+    </p>
+
+    <p class="heading">Sold players count: {{ Sold_player_count}} 
+    </p>
 
 {% else %}
     <h2 class="text-center">admin can only see this page so login as admin</h2>
