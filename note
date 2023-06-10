@@ -24,20 +24,22 @@ not emergency work:
 
 work pending:
 1)pdf work
-2)mobileview template missing problem
+2)new changes in github not loading in aws ec2 (BIG issue)
 3)reserve ad remaining players logic
-4)refresh button page not reloading  during start bid and bid increment (refresh bid screen) admin,and team both mobile and web view
+4)documents for team, admin database and admin in bid day
 5)design part in my auction and team players 
 6)players registation buttion and team creation button ( button as well as link)enable and disable by admin  
+
+
 7)check if 300 players in view of bid status and player registration
 8)database change and backup 
 9)verify players aadharcard details
 10)once players bid over , once again click start bid it adding all players ..That is problem
-11)documents for team, admin database and admin in bid day
 
 
-
-
+work done:
+1)refresh button page not reloading  during start bid and bid increment (refresh bid screen) admin,and team both mobile and web view
+2)bid screen mobileview template missing problem bcz of amazon ec2 not loaded for new changes
 
 
 [icon player 10000 fixed so available point = 40000 once create icon player, remaining player =14 these two manual entry by admin]

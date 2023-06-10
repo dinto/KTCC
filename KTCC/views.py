@@ -249,7 +249,16 @@ def Bid_Screen_new_Player(request):
     Bid_bucket_count=Bid_Bucket.objects.count()
     if request.method == "POST" and 'StartBid' in request.POST: 
         Bid_bucket_count=Bid_Bucket.objects.count()
-        if(Bid_bucket_count<1):
+        #new code added for after bid compele again start bid click means it never load to bidbucket
+        Bid_already_Started=Bid_Details.objects.all()
+        is_bid_started=0
+        for check in Bid_already_Started:
+            if(check.Player_name.is_icon_player==False):
+                is_bid_started +=1          
+            else:
+                pass
+        if(Bid_bucket_count<1 and is_bid_started==0):
+        #new code end    
             players= PlayerInfo.objects.filter(is_icon_player=False).all()
             for i in players:
                 Bucket=Bid_Bucket.objects.create(Player_name=i,Status='OPEN',Season=i.Season,Current_player=False)
@@ -274,16 +283,16 @@ def Bid_Screen_new_Player(request):
     if request.method == "POST" and 'UnSold' in request.POST: 
         CurrentBids = CurrentBid.objects.all()
         if(CurrentBid.objects.count()<1):  
-            print("UnSold")   
-            Bid_Bucket_details=Bid_Bucket.objects.filter(Current_player = True)
-            Unsold_players=Unsold_player.objects.create(
-                Player_name=Bid_Bucket_details[0].Player_name,
-                Status='UnSold',
-                Season=Bid_Bucket_details[0].Season
-                )
-            Unsold_players.save()
-            CurrentBids.delete()
-            Bid_Bucket.objects.filter(Current_player = True).delete()
+            if(Bid_Bucket.objects.filter(Current_player = True).count()):
+                Bid_Bucket_details=Bid_Bucket.objects.filter(Current_player = True)
+                Unsold_players=Unsold_player.objects.create(
+                    Player_name=Bid_Bucket_details[0].Player_name,
+                    Status='UnSold',
+                    Season=Bid_Bucket_details[0].Season
+                    )
+                Unsold_players.save()
+                CurrentBids.delete()
+                Bid_Bucket.objects.filter(Current_player = True).delete()
     if request.method == "POST" and 'REAUCTION' in request.POST:
         Bid_bucket_count=Bid_Bucket.objects.count()
         if(Bid_bucket_count<1):
@@ -295,6 +304,8 @@ def Bid_Screen_new_Player(request):
                 instance.delete()
 
     if(Bid_bucket_count>0):
+        Unsold_player_count=Unsold_player.objects.count()
+        Sold_player_count=Bid_Details.objects.count()
         current_bid_player_count =Bid_Bucket.objects.filter(Current_player = True).count()
         Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
         CurrentBids = CurrentBid.objects.all()
@@ -304,7 +315,9 @@ def Bid_Screen_new_Player(request):
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
                 "Base_piont":Base_piont,
-                "Bid_bucket_count":Bid_bucket_count
+                "Bid_bucket_count":Bid_bucket_count,
+                "Unsold_player_count":Unsold_player_count,
+                "Sold_player_count":Sold_player_count
             }
             if mobileBrowser (request):
                 return render(request, "m_Bid_screen_new_player.html",context)
@@ -319,14 +332,20 @@ def Bid_Screen_new_Player(request):
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
                 "Base_piont":Base_piont,
-                "Bid_bucket_count":Bid_bucket_count
+                "Bid_bucket_count":Bid_bucket_count,
+                "Unsold_player_count":Unsold_player_count,
+                "Sold_player_count":Sold_player_count
                 }
                 if mobileBrowser (request):
                     return render(request, "m_Bid_screen_new_player.html",context)
                 else:
                     return render(request, "Bid_screen_new_player.html",context)
+    Unsold_player_count=Unsold_player.objects.count()
+    Sold_player_count=Bid_Details.objects.count()
     context = {
-    "Bid_bucket_count":Bid_bucket_count
+    "Bid_bucket_count":Bid_bucket_count,
+    "Unsold_player_count":Unsold_player_count,
+    "Sold_player_count":Sold_player_count
     }
     if mobileBrowser (request):
         return render(request, "m_Bid_screen_new_player.html",context)

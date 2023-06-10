@@ -17,7 +17,8 @@ class Season(models.Model):
     Winning_point=models.IntegerField()
     NR_point=models.IntegerField()
     Total_over_Per_Innings=models.IntegerField()
-    
+    #is_player_Registation_closed=models.BooleanField(default=False)
+    #is_team_creation_closed=models.BooleanField(default=False)
     class Meta:
         verbose_name_plural = 'Season'
     def __str__(self):

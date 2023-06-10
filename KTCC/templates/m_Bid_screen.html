@@ -125,6 +125,9 @@
   <br/>
   <form action="{% url 'Bid_Screen' %}" method="POST">
    <button  class="btn btn-primary " name="Increment"   style="text-align: center; margin-left: 20%;" type="submit">Start/Increment Bid For Team</button>
+   &nbsp;&nbsp;
+   <br/>
+   <button  type="submit" class="btn btn-info"  style="text-align: center;  margin-left: 20%; margin-top:3%"><a href="{{ request.get_full_path }}">Reload</a></button>
   </form>
 </div>
 {% endif %}
