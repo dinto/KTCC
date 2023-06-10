@@ -17,10 +17,10 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('Bid_Screen/', views.Bid_Screen, name='Bid_Screen'),
     path('Bid_Screen_new_Player', views.Bid_Screen_new_Player, name='Bid_Screen_new_Player'),
-    path('GenerateRegisteredPlayersInfo',views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'), 
+    path('GenerateRegisteredPlayersInfo', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'), 
     path('BidStatus', views.BidStatus, name='BidStatus'),
     path('Teams/<int:id>',views.Team_players, name='Team_players'), 
-    path('Icon_Player',views.Icon_Player, name='Icon_Player'), 
+    #path('Icon_Player', views.Icon_Player, name='Icon_Player'), 
     #path('GenerateRegisteredPlayersInfo/', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'),
 
 
