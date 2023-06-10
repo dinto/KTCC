@@ -18,6 +18,8 @@ from reportlab.platypus import Image
 from django.db.models import Q
 from django.template import loader 
 from .utils import mobileBrowser
+from django.templatetags.static import static
+
 
 # Create your views here.
 
@@ -444,23 +446,31 @@ def Icon_Player(request):
     #}
     return render(request, "Icon_Player_selection.html")
 
-def pdfGen(request):
-    buf=io.BytesIO()
-    c=canvas.Canvas(buf,pagesize=letter,bottomup=0) 
-    textob=c.beginText()
+
+def GenerateRegisteredPlayersInfo(request):
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer,pagesize=letter,bottomup=0)
+    textob=p.beginText()
     textob.setTextOrigin(inch,inch)
     textob.setFont("Helvetica",14)
     players= PlayerInfo.objects.all()
     lines =[]
-    for player in players:
+    for player in players:   
+        lines.append(player.Season)
+        imagepath='/static/'+ str(player.Profile_Pic)
+        #url = static(str(player.Profile_Pic))
+        #print(url)
+        #p.drawImage(url,-0.8*inch,9.3*inch)
+       # p.drawInlineImage('https://www.plus2net.com/images/top2.jpg',2.2*inch,2.2*inch )
+       # lines.append(Image('static/images/LogoT10.jpeg',2.2*inch,2.2*inch))
+        lines.append(player.Profile_Pic)
         lines.append(player.name)
+        lines.append(player.Role)
         lines.append(player.phone_number)
     for line in lines:
-        textob.textLine(line)
-    c.drawText(textob)
-    c.showPage()
-    c.save
-    buf.seek(0)
-
-   # return response 
-    return FileResponse(buf,as_attachment=True,filename='PlayersInfo.pdf')
+        textob.textLine(str(line))
+    p.drawText(textob)
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='RegisteredPlayers.pdf')
