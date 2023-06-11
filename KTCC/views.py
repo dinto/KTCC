@@ -229,7 +229,7 @@ def Bid_Screen(request):
             "Remaining_Point":Remaining_Point
         }
         if mobileBrowser (request):
-            return render(request, "m_Bid_Screen.html",context)
+            return render(request, "mobile_Bid_screen.html",context)
         else:
             return render(request, "Bid_Screen.html",context)
         
@@ -241,7 +241,7 @@ def Bid_Screen(request):
         "Remaining_Point":Remaining_Point
     }
     if mobileBrowser (request):
-        return render(request, "m_Bid_Screen.html",context)
+        return render(request, "mobile_Bid_screen.html",context)
     else:
         return render(request, "Bid_Screen.html",context)
 
