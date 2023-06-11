@@ -1,73 +1,147 @@
-{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <title>KTCC</title>
+  <style>
+    footer {
+      bottom: 0;
+    }
+    body{
+      background-color:  rgb(16,23,43)
+    }
+    .heading{
+          color: #f7e343;
+          font-family: Merriweather;
+          font-size: 20px;
+    }
+  </style>
+
 <br/>
 <br/>
 <br/>
+<nav class="navbar fixed-top navbar-expand-lg  navbar-dark bg-dark" style="background: linear-gradient(to right, rgb(27,63,96) , rgb(12,97,125));">
+    <div class="container-fluid" >
+      <button
+        class="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarExample01"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+      <i class="navbar-toggler-icon"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExample01" style="margin-left: 50%;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 20px;">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item {% if navbar == 'home' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'KTCC' %}">Home</a>
+            </li> 
+          {% else %}
+            <li class="nav-item {% if navbar == 'home' %} active {% endif %}">
+              <a class="nav-link" href="{% url 'welcome' %}">Home</a>
+            </li> 
+          {% endif %}
+          <li class="nav-item {% if navbar == 'TEAMS' %} active {% endif %}">
+            <a class="nav-link" href="{% url 'Teams' %}">Teams</a>
+          </li>
+          <li class="nav-item {% if navbar == 'PLAYERS' %} active {% endif %}">
+            <a class="nav-link" href="{% url 'Players' %}">Players </a>
+          </li>   
+          <li class="nav-item {% if navbar == 'PLAYERS' %} active {% endif %}">
+            <a class="nav-link" href="{% url 'BidStatus' %}">Bid Status </a>
+          </li>  
+          <li class="nav-item {% if navbar == 'Matches' %} active {% endif %}">
+            <a class="nav-link" href="{% url 'Matches' %}">Schedule </a>
+          </li>     
+          {% if request.user.is_authenticated %}
+              <a class="btn btn-outline-success my-2" href="{% url 'logout' %}">Logout</a>
+  
+          {% else %}
+              <a class="btn btn-outline-success my-2 " href=" {% url 'login' %}" >Team Login</a>
+          {% endif %}
+          
+  
+  
+              
+        </ul>
+      </div>
+    </div>
+</nav>
+  
+<div hx-get="{% url 'Bid_Screen' %}" hx-trigger="every 3s" >
 <h2 class="text-center heading">Bid Screen</h2>
 <h2 class="text-center heading">{{username}}</h2>
 <div class="row">
   <div class="col-12">
     {% for Current_Bidding_Player in random_object %}
       {% if Current_Bidding_Player.Player_name.is_home_ground_player %}  
-  <div class="card" style="margin-left: 5px; background-color: rgb(204, 124, 200);">
-    {% else %}
-    <div class="card" style="margin-left: 5px;  background-color:  #04e1e9;">
-    {% endif %}
-    
-    <div class="upper">
-      <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
-    </div>
-    <div class="user text-center">
-      <div class="profile">
-     <img src="/static/{{Current_Bidding_Player.Player_name.Profile_Pic}}" class="rounded-circle" width="80">
-      </div>
-    </div>
-    <div class="mt-5 text-center" >
-        
-      <h4 class="mb-0" style="color: #3e0bcc;"><b>{{ Current_Bidding_Player.Player_name.name }}</b></h4>
-      <div class="row">
-        <div class="col-6" style="text-align: right; color: #3e0bcc;">
-            Role :
-        </div>
-        <div class="col-6" style="text-align: left; color: #3e0bcc;">
-          {{ Current_Bidding_Player.Player_name.Role }}
-        </div>
+        <div class="card" style="margin-left: 5px; background-color: rgb(204, 124, 200);">
+      {% else %}
+        <div class="card" style="margin-left: 5px;  background-color:  #04e1e9;">
+      {% endif %}
+            
+          <div class="upper">
+            <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
+          </div>
+          <div class="user text-center">
+            <div class="profile">
+              <img src="/static/{{Current_Bidding_Player.Player_name.Profile_Pic}}" class="rounded-circle" width="80">
+            </div>
+          </div>
+          <div class="mt-5 text-center" >
+              
+            <h4 class="mb-0" style="color: #3e0bcc;"><b>{{ Current_Bidding_Player.Player_name.name }}</b></h4>
+            <div class="row">
+              <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                  Role :
+              </div>
+              <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                {{ Current_Bidding_Player.Player_name.Role }}
+              </div>
 
-      </div>
-      <div class="row">
-        <div class="col-6" style="text-align: right; color: #3e0bcc;">
-            Batting style :
-        </div>
-        <div class="col-6" style="text-align: left; color: #3e0bcc;">
-            {{ Current_Bidding_Player.Player_name.Batting_style }}
-        </div>
+            </div>
+            <div class="row">
+              <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                  Batting style :
+              </div>
+              <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                  {{ Current_Bidding_Player.Player_name.Batting_style }}
+              </div>
 
-      </div>
-      <div class="row">
-        <div class="col-6" style="text-align: right; color: #3e0bcc;">
-            Bowling style :
-        </div>
-        <div class="col-6" style="text-align: left; color: #3e0bcc;">
-            {{ Current_Bidding_Player.Player_name.Bowling_style }}
-        </div>
-      </div>  
-      {% if Current_Bidding_Player.Player_name.is_home_ground_player %}  
-      <br>
-      <div class="row">
-        
-        <div style="text-align: center; color: #3e0bcc;">
-            Home Ground Player 
-        </div>
-      </div>   
-      {% endif %}         
-    </div>
+            </div>
+            <div class="row">
+              <div class="col-6" style="text-align: right; color: #3e0bcc;">
+                  Bowling style :
+              </div>
+              <div class="col-6" style="text-align: left; color: #3e0bcc;">
+                  {{ Current_Bidding_Player.Player_name.Bowling_style }}
+              </div>
+            </div>  
+            {% if Current_Bidding_Player.Player_name.is_home_ground_player %}  
+            <br>
+            <div class="row">
+              
+              <div style="text-align: center; color: #3e0bcc;">
+                  Home Ground Player 
+              </div>
+            </div>   
+            {% endif %}         
+          </div>
      
-   </div>
-   {% endfor %}
+       </div>
+    {% endfor %}
 
-  </div>
   </div>
 </div>
 
@@ -134,6 +208,38 @@
 
    <br/>
 
+   <footer class="footer  " style="font-family: Merriweather;font-size: 18px;">
+    <b><hr ></b>
+    <div class="text-center p-3">
+      <h2 class="heading"><b>Get In Touch</b></h2>
+      <b> <hr   style="color:#eeff10; height: 3px;"></b> 
+      <a href="mailto:ktccchittilappilly@gmail.com" style="text-align: left;" target="_blank"><i class="bi bi-envelope" ></i> ktccchittilappilly@gmail.com </a> 
+      <br>
+      <span><a href="tel: 9048492698" style="text-align: left;" target="_blank"><i class="bi bi-telephone"></i> 9048492698</a></span>
+      <br>
+      <br>
+      <span>
+        <a href="https://www.facebook.com/profile.php?id=100086994039446&mibextid=ZbWKwL" target="_blank"><i class="bi bi-facebook"></i></a>
+        &nbsp;
+        <a href="https://www.youtube.com/channel/UC4XdsH-b8KKkOZn0nzgPnlg" target="_blank"><i class="bi bi-youtube"></i></a>
+        &nbsp;
+       <!-- <a href="#"><i class="bi bi-instagram" target="_blank"></i></a>
+        &nbsp; -->
+      </span>
+    <!-- Copyright -->
+      <div class="text-center p-3 " style="color: #f7e343;">
+        Copyright © 2023. All Rights Reserved , 
+        <a  target="_blank" href="https://www.google.com/search?rlz=1C1CHZN_enIN981IN981&q=Sirach+Technologies+Pvt+Ltd&spell=1&sa=X&ved=2ahUKEwjc1qnXx_v-AhWsamwGHYgLBVwQBSgAegQIGRAB&cshid=1684299297363610&biw=1536&bih=769&dpr=1.25">Sirach Technology Pvt Ltd</a>
+      </div>
 
+    </div>
+    
 
+  </footer>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.2/htmx.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  
+</div>
+   
 {% endblock content %}

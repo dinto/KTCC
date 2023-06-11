@@ -196,29 +196,31 @@ def Bid_Screen(request):
     Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
     if request.method == "POST" and 'Increment' in request.POST: 
         current_user = request.user
-        if(CurrentBids):
-            if(CurrentBids[0].Current_Bid_Point >= Base_piont and CurrentBids[0].Current_Bid_Point<3000):
-                incremental=CurrentBids[0].Current_Bid_Point+200
-            if(CurrentBids[0].Current_Bid_Point >= 3000 and CurrentBids[0].Current_Bid_Point<10000):
-                incremental=CurrentBids[0].Current_Bid_Point+500
-            if(CurrentBids[0].Current_Bid_Point >= 10000):
-                incremental=CurrentBids[0].Current_Bid_Point+1000
-            CurrentBid_details=CurrentBid.objects.filter(Player_name = random_object[0].Player_name)
-            current_team =TeamInfo.objects.filter(Users = current_user.id)
-            Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
-            if(Available_Point[0].Available_Point>=incremental):
-                CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
-        else:
-            current_team =TeamInfo.objects.filter(Users = current_user.id)
-            Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
-            if(Available_Point[0].Available_Point>=1000):
-                CurrentBid_details=CurrentBid.objects.create(
-                    Player_name=random_object[0].Player_name,
-                    Current_Bid_Point=Base_piont,
-                    Team_Name=current_team[0],
-                    Season=random_object[0].Season
-                )
-                CurrentBid_details.save()
+        Bid_Bucket_current_player_count=Bid_Bucket.objects.filter(Current_player = True).count()
+        if(Bid_Bucket_current_player_count):
+            if(CurrentBids):
+                if(CurrentBids[0].Current_Bid_Point >= Base_piont and CurrentBids[0].Current_Bid_Point<3000):
+                    incremental=CurrentBids[0].Current_Bid_Point+200
+                if(CurrentBids[0].Current_Bid_Point >= 3000 and CurrentBids[0].Current_Bid_Point<10000):
+                    incremental=CurrentBids[0].Current_Bid_Point+500
+                if(CurrentBids[0].Current_Bid_Point >= 10000):
+                    incremental=CurrentBids[0].Current_Bid_Point+1000
+                CurrentBid_details=CurrentBid.objects.filter(Player_name = random_object[0].Player_name)
+                current_team =TeamInfo.objects.filter(Users = current_user.id)
+                Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
+                if(Available_Point[0].Available_Point>=incremental):
+                    CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
+            else:
+                current_team =TeamInfo.objects.filter(Users = current_user.id)
+                Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
+                if(Available_Point[0].Available_Point>=1000):
+                    CurrentBid_details=CurrentBid.objects.create(
+                        Player_name=random_object[0].Player_name,
+                        Current_Bid_Point=Base_piont,
+                        Team_Name=current_team[0],
+                        Season=random_object[0].Season
+                    )
+                    CurrentBid_details.save()
         context = {
             "random_object": random_object,
             "CurrentBid":CurrentBids,
@@ -458,6 +460,8 @@ def Team_players(request,id):
     Team_name=TeamInfo.objects.get(id=id)
     #print(Bid_Details.objects.filter(Team_Name=Team_name.id))
     Team_players = Bid_Details.objects.filter(Team_Name=Team_name.id)
+    #Team_players = list(Bid_Details.objects.filter(Team_Name=Team_name.id))
+    #Team_players = [Team_players[i:i+2] for i in range(0, len(Team_players), 2)]
     context = {
         "Team_players":Team_players
     }
