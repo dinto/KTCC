@@ -142,10 +142,19 @@
   <div class="col-4">
     <div class="card">
       <div class="upper">
-        <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">      
-        <span style="color: red;">Remaining Point: {{Remaining_Point.Available_Point}}</span>
+        <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid"> 
+        <div class="row">
+          <span style="color: red; text-align:right;">Remaining Point: {{Remaining_Point.Available_Point}}</span>
+        </div> 
+        <div class="row">
+          <span style="color: red;text-align:right;">Reserve point: {{reserve_point}}</span>
+        </div>
+        <div class="row">
+          <span style="color: red;text-align:right;">Available point To bid: {{Max_Available_point_To_bid}}</span>
+        </div>    
       </div>
-      <div class="mt-5 text-center" >
+      <br/>
+      <div class=" text-center" >
         <div class="row">
           <div class="col-6" style="text-align: right; color: #3e0bcc;">
             Base Point :
@@ -191,7 +200,9 @@
    <button  type="submit" class="btn btn-info"  style="text-align: center;"><a href="{{ request.get_full_path }}">Reload</a></button>
   </form>
 </div>
+<span style="color:white;">players count: {{Players_count}}</span>
 {% endif %}
+
 
    <footer class="footer  " style="font-family: Merriweather;font-size: 18px;">
     <b><hr ></b>

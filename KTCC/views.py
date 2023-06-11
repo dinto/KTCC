@@ -194,6 +194,17 @@ def Bid_Screen(request):
     random_object =Bid_Bucket.objects.filter(Current_player = True)
     CurrentBids = CurrentBid.objects.all()
     Base_piont=Season.objects.values('Base_Point_For_Player')[0]['Base_Point_For_Player']
+    Team=TeamInfo.objects.filter(Users = request.user)
+    Players_count=Bid_Details.objects.filter(Team_Name=Team[0].id).count()
+    Minimum_Players_Per_Team=Season.objects.values('Minimum_Players_Per_Team')[0]['Minimum_Players_Per_Team']
+    reservePlayers=Minimum_Players_Per_Team-Players_count
+    if(reservePlayers>0):
+        reserve_point=(reservePlayers-1)*Base_piont
+    else:
+        reserve_point=0
+    current_team =TeamInfo.objects.filter(Users = request.user.id)
+    Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
+    Max_Available_point_To_bid=int(Available_Point[0].Available_Point)-int(reserve_point)
     if request.method == "POST" and 'Increment' in request.POST: 
         current_user = request.user
         Bid_Bucket_current_player_count=Bid_Bucket.objects.filter(Current_player = True).count()
@@ -208,12 +219,15 @@ def Bid_Screen(request):
                 CurrentBid_details=CurrentBid.objects.filter(Player_name = random_object[0].Player_name)
                 current_team =TeamInfo.objects.filter(Users = current_user.id)
                 Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
-                if(Available_Point[0].Available_Point>=incremental):
+                #if(Available_Point[0].Available_Point>=incremental):
+                if(Max_Available_point_To_bid>=incremental):    
+                
                     CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
             else:
                 current_team =TeamInfo.objects.filter(Users = current_user.id)
                 Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
-                if(Available_Point[0].Available_Point>=1000):
+                #if(Available_Point[0].Available_Point>=1000):
+                if(Max_Available_point_To_bid>=1000):
                     CurrentBid_details=CurrentBid.objects.create(
                         Player_name=random_object[0].Player_name,
                         Current_Bid_Point=Base_piont,
@@ -226,7 +240,10 @@ def Bid_Screen(request):
             "CurrentBid":CurrentBids,
             "username":username,
             "Base_piont":Base_piont,
-            "Remaining_Point":Remaining_Point
+            "Remaining_Point":Remaining_Point,
+            "Players_count":Players_count,
+            "reserve_point":reserve_point,
+            "Max_Available_point_To_bid":Max_Available_point_To_bid,
         }
         if mobileBrowser (request):
             return render(request, "mobile_Bid_screen.html",context)
@@ -238,7 +255,10 @@ def Bid_Screen(request):
         "CurrentBid":CurrentBids,
         "username":username,
         "Base_piont":Base_piont,
-        "Remaining_Point":Remaining_Point
+        "Remaining_Point":Remaining_Point,
+        "Players_count":Players_count,
+        "reserve_point":reserve_point,
+        "Max_Available_point_To_bid":Max_Available_point_To_bid,
     }
     if mobileBrowser (request):
         return render(request, "mobile_Bid_screen.html",context)

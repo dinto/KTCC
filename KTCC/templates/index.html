@@ -5,6 +5,10 @@
 <br/>
 <div class="container">
     <div class="row">
+      {% if user.is_superuser %}
+      {% else %}
+
+
         <div >
             <div class="card heading" style="background-color: rebeccapurple;">
                 <p class="card-text heading">Join Auction for biding players while T-10 auction occurs</p>
@@ -20,16 +24,19 @@
             </div>
 
         </div>
+        {% endif %}
         &nbsp;&nbsp;
         <div>
             <div class="card" style="background-color: aliceblue;" >
-                <div class="card-body d-flex">
-                <a href="{% url 'profile' %}" class="btn btn-primary" style="text-align: center;">Create Team</a>
-                {% if user.is_superuser %}
-                <form action="{% url 'Bid_Screen_new_Player' %}" style="margin-left: 5px;" method="POST">
-                    <button  class="btn btn-primary " name="StartBid"   style="text-align: center;" type="submit">Start Bid</button>
-                  </form>
-                {% endif %}
+                  <div class="card-body d-flex">
+                  
+                  {% if user.is_superuser %}
+                    <form action="{% url 'Bid_Screen_new_Player' %}" style="margin-left: 5px;" method="POST">
+                        <button  class="btn btn-primary " name="StartBid"   style="text-align: center;" type="submit">Start Bid</button>
+                    </form>
+                  {% else %}
+                    <a href="{% url 'profile' %}" class="btn btn-primary" style="text-align: center;">Create Team</a>
+                  {% endif %}
                 </div>
             </div>
             
