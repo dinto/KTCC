@@ -26,12 +26,11 @@ not emergency work:
 work pending:
 1)pdf work
 2)design part in my auction and team players 
-3)database change and backup
-4)documents for team, admin database and admin in bid day
+3)documents for team, admin database and admin in bid day
 
-5)check if 300 players in view of bid status and player registration
-6)players registation buttion and team creation button ( button as well as link)enable and disable by admin  
-7)verify players aadharcard details
+4)check if 300 players in view of bid status and player registration
+5)players registation buttion and team creation button ( button as well as link)enable and disable by admin  
+6)verify players aadharcard details
 
 
 just checking
@@ -42,8 +41,9 @@ work done:
 3)once players bid over , once again click start bid it adding all players ..That is problem
 4)new changes in github not loading in aws ec2 (BIG issue)
 5)reserve ad remaining players logic
+6)database change and backup
 
-
+3.109.217.105
 
 workflow:
 
