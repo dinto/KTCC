@@ -97,7 +97,7 @@ DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'KTCC_DATABASE',
-		'USER': 'KTCC',
+		'USER': 'root',
 		'PASSWORD': 'ktcc@2023',
 		'HOST':'localhost',
 		'PORT':'3306',
