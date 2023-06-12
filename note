@@ -2,6 +2,7 @@ instructions:
 1)once team click start  bid then team will be inside bid competition
 2) admin should add all team login from admin dashboard
 3)icon player = 10000 hence set maximum point become 40000  for particular team & icon player before bid date
+4)[icon player 10000 fixed so available point = 40000 once create icon player, remaining player =14 these two manual entry by admin]
 
 check/testing:
 1)remove or add to bid details  bid_screen_new player if greater than 2    problem when admin refresh the screen
@@ -42,17 +43,6 @@ work done:
 4)new changes in github not loading in aws ec2 (BIG issue)
 5)reserve ad remaining players logic
 
-[icon player 10000 fixed so available point = 40000 once create icon player, remaining player =14 these two manual entry by admin]
-
-
-==========
-Team bid status:
-teamlogo 
-team name 
-No of players 
-remaining
-max 50000  
-
 
 
 workflow:
@@ -71,31 +61,8 @@ settings
 STATICFILES_DIRS=os.path.join(BASE_DIR,'static'),
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles_build','static')
 
-DATABASES={
- 'default':{
-'ENGINE':'django.db.backends.postgresql',
-'NAME':'',
-'USER':'',
-'PASSWORD':'',
-'HOST':'',
-'PORT':'6625',
-
-
-}
-
-}
-
-========================
-requirement.txt:
-..................
-remove below name:
-psycopg2
-
-
-#note changed
-
 #to restart
-
+==========================
 sudo supervisorctl reread
 sudo supervisorctl update 
 sudo supervisorctl status
