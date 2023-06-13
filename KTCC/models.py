@@ -32,7 +32,7 @@ class PlayerInfo(models.Model):
     dob = models.DateField()
     age = models.IntegerField()
     place = models.CharField(max_length=100)
-    phone_number=models.IntegerField()
+    phone_number=models.BigIntegerField()
     mail_id= models.EmailField(max_length=100)
     gender_choice = (
         ("male", "Male"),
