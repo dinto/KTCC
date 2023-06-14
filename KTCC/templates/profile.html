@@ -14,7 +14,10 @@
           <form action="" method="POST" class="post-form" enctype="multipart/form-data">
           {% csrf_token %}
           {{ forms| crispy }}
+          {% if is_team_creation_closed %}
+          {% else %}
           <button type="submit" class="save btn btn-success">Submit</button>
+          {% endif %}
           </form> 
       </div>
   </div>

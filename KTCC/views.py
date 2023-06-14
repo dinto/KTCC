@@ -19,6 +19,7 @@ from django.db.models import Q
 from django.template import loader 
 from .utils import mobileBrowser
 from django.templatetags.static import static
+import csv
 
 
 # Create your views here.
@@ -135,8 +136,12 @@ def players_regi(request):
         
     else:
         forms = CreatePlayer()
+    season=Season.objects.all()
+    is_player_Registation_closed=season[0].is_player_Registation_closed
     context = {
-        "forms": forms
+        "forms": forms,
+        "is_player_Registation_closed":is_player_Registation_closed,
+
     }
     return render(request, "registration.html", context)
 
@@ -177,8 +182,11 @@ def profile(request):
     
     else:
         forms = CreateTeam()
+    season=Season.objects.all()
+    is_team_creation_closed=season[0].is_team_creation_closed
     context = {
-        "forms": forms
+        "forms": forms,
+        "is_team_creation_closed":is_team_creation_closed,
     }
     return render(request, "profile.html", context)
 
@@ -521,3 +529,49 @@ def GenerateRegisteredPlayersInfo(request):
     p.save()
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename='RegisteredPlayers.pdf')
+
+def players_csv(request):
+    response =HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] ='attcahment;filename=playersregistration.csv'
+    writer =csv.writer(response)
+    players= PlayerInfo.objects.all().order_by('id')
+    writer.writerow(['Registration No','Name','Date of Birth','Age','Place','Phone Number','Mail Id','Role','Batting Style','Bowling Style','is home ground player','is icon player'])
+
+    for player in players:
+        if(player.is_home_ground_player):
+            home_ground_player="YES"
+        else:
+            home_ground_player="NO"
+        if(player.is_icon_player):
+            icon_player="YES"
+        else:
+            icon_player="NO"
+        writer.writerow([player.id,player.name,player.dob,player.age,player.place,player.phone_number,player.mail_id,player.Role,player.Batting_style,player.Bowling_style,home_ground_player,icon_player])
+
+    return response
+
+def Sold_players_csv(request):
+    response =HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] ='attcahment;filename=SoldPlayers.csv'
+    writer =csv.writer(response)
+    players= Bid_Details.objects.all().order_by('id') 
+    writer.writerow(['Registration No','Player Name','Sold Point ','Team Name','Season'])
+
+    for player in players:
+        regi=PlayerInfo.objects.all().filter(name=player.Player_name.name)
+        writer.writerow([regi[0].id,player.Player_name.name,player.Sold_Point,player.Team_Name,player.Season])
+
+    return response
+
+def Unsold_players_csv(request):
+    response =HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] ='attcahment;filename=UnSoldPlayers.csv'
+    writer =csv.writer(response)
+    players= Unsold_player.objects.all().order_by('id')
+    writer.writerow(['Registration No','Player Name','Season'])
+
+    for player in players:
+        regi=PlayerInfo.objects.all().filter(name=player.Player_name.name)
+        writer.writerow([regi[0].id,player.Player_name.name,player.Season])
+
+    return response

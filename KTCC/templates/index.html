@@ -34,6 +34,14 @@
                     <form action="{% url 'Bid_Screen_new_Player' %}" style="margin-left: 5px;" method="POST">
                         <button  class="btn btn-primary " name="StartBid"   style="text-align: center;" type="submit">Start Bid</button>
                     </form>
+                    &nbsp;
+                    <a href="{% url 'players_csv' %}" class="btn btn-primary" style="text-align: center;">Players ExcelSheet</a>
+                    &nbsp;
+                    <a href="{% url 'Sold_players_csv' %}" class="btn btn-primary" style="text-align: center;">Sold Players ExcelSheet</a>
+                    &nbsp;
+                    <a href="{% url 'Unsold_players_csv' %}" class="btn btn-primary" style="text-align: center;">UnSold Players ExcelSheet</a>
+
+
                   {% else %}
                     <a href="{% url 'profile' %}" class="btn btn-primary" style="text-align: center;">Create Team</a>
                   {% endif %}

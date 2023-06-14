@@ -20,6 +20,9 @@ urlpatterns = [
     path('GenerateRegisteredPlayersInfo/', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'),
     path('BidStatus', views.BidStatus, name='BidStatus'),
     path('Teams/<int:id>',views.Team_players, name='Team_players'), 
+    path('players_csv/', views.players_csv, name='players_csv'),
+    path('Sold_players_csv/', views.Sold_players_csv, name='Sold_players_csv'),
+    path('Unsold_players_csv/', views.Unsold_players_csv, name='Unsold_players_csv'),
     #path('Icon_Player', views.Icon_Player, name='Icon_Player'), 
     #path('GenerateRegisteredPlayersInfo/', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'),
 

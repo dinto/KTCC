@@ -94,6 +94,7 @@
           <div class="upper">
             <img src="{% static '/images/LogoT10.jpeg' %}" style="width: 10%;" class="img-fluid">
           </div>
+          <h4 class="mb-0" style="color: #3e0bcc;text-align: center"><b>Registration No: {{ Current_Bidding_Player.Player_name.id }}</b></h4>
           <div class="user text-center">
             <div class="profile">
               <img src="/static/{{Current_Bidding_Player.Player_name.Profile_Pic}}" class="rounded-circle" width="80">
@@ -155,6 +156,12 @@
           
           <span style="color: red;">Remaining Point: {{Remaining_Point.Available_Point}}</span>
         </div>
+        <div class="row">
+          <span style="color: red;text-align:right;">Reserve point: {{reserve_point}}</span>
+        </div>
+        <div class="row">
+          <span style="color: red;text-align:right;">Available point To bid: {{Max_Available_point_To_bid}}</span>
+        </div>    
         <div class="mt-5 text-center" >
           <div class="row">
             <div class="col-6" style="text-align: right; color: #3e0bcc;">
