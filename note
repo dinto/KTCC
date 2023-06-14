@@ -14,9 +14,7 @@ not emergency work:
 1)Tournment details like youtube link ,facebook link,insta,phone ,email id  from database to base template
 2) page not found setting 
 3)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
-4)admin can lock bidding by team
-5)instructions typing model if possible
-6)all bid entries for player add as history for looking for everybody 
+4)all bid entries for player add as history for looking for everybody 
 
 
 1)messages not displaying 
@@ -29,11 +27,7 @@ work pending:
 3)documents for team, admin database and admin in bid day
 
 4)check if 300 players in view of bid status and player registration
-5)players registation buttion and team creation button ( button as well as link)enable and disable by admin  
-6)verify players aadharcard details
-
-
-just checking
+5)verify players aadharcard details
 
 work done:
 1)refresh button page not reloading  during start bid and bid increment (refresh bid screen) admin,and team both mobile and web view
@@ -42,13 +36,9 @@ work done:
 4)new changes in github not loading in aws ec2 (BIG issue)
 5)reserve ad remaining players logic
 6)database change and backup
+7)admin can lock bidding by team (players registation buttion and team creation button ( button as well as link)enable and disable by admin )
 
-3.109.217.105
-
-workflow:
-
-Bid_Screen_new_Player : bucket>0 ,if yes then current player true for random number else -> save playersinfo to bid player model and  current player is false
-bid screen : print all current player true
+Elastic ip: 13.200.81.17
 
 rules:
 player registration in particular time period
