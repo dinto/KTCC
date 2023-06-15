@@ -44,7 +44,7 @@ def welcome(request):
     page = request.GET.get('page')
     Videos = p.get_page(page)
     nums = "a" * Videos.paginator.num_pages
-    Auction_rules=AUCTIONRULE.objects.all()
+    Auction_rules=AUCTIONRULE.objects.all().order_by('id')
     return render(request,'welcome.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums,'Auction_rules':Auction_rules})
     #return render(request,'Teams.html',{})
 
