@@ -13,7 +13,7 @@ import io
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter 
 from django.core.paginator import Paginator
-from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player,Schedule,TeamInfo,Bid_Bucket,PlayerInfo
+from KTCC.models import VideoLink,CurrentBid,Season,ImportantDate,Available_Point_Table,Bid_Details,Unsold_player,Schedule,TeamInfo,Bid_Bucket,PlayerInfo,AUCTIONRULE
 from reportlab.platypus import Image
 from django.db.models import Q
 from django.template import loader 
@@ -44,7 +44,8 @@ def welcome(request):
     page = request.GET.get('page')
     Videos = p.get_page(page)
     nums = "a" * Videos.paginator.num_pages
-    return render(request,'welcome.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums})
+    Auction_rules=AUCTIONRULE.objects.all()
+    return render(request,'welcome.html',{'ImportantDate':Important_Date,'Videos':Videos,'nums':nums,'Auction_rules':Auction_rules})
     #return render(request,'Teams.html',{})
 
 def Teams(request): 

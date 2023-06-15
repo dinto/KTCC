@@ -60,7 +60,26 @@
       {% endif %}
     </ul>
   </nav>
-<div>
-        
+
+
+
+  <div >
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr class="heading">
+          <th style="text-align: center;">Auction Rules</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rule in Auction_rules %}
+          <tr style="color: aliceblue;">
+            <td>{{rule.Rules}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+<div>  
 
 {% endblock content %}
