@@ -15,20 +15,21 @@ not emergency work:
 2) page not found setting 
 3)Reset for Live -> it will delete bid bucket and bid players   before this one warning msg needed
 4)all bid entries for player add as history for looking for everybody 
-
-
-1)messages not displaying 
-2)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
+5)messages not displaying 
+6)swap player option ( cancelled player beome unavailable and reason typing) update both registered and bid database
 
 
 work pending:
-1)pdf work
+1)pdf work (icon players,players registration ,sold players)
 2)design part in my auction and team players 
 3)documents for team, admin database and admin in bid day
-
-4)check if 300 players in view of bid status and player registration
+4)check if 300 players in view of bid status and player registration (issue of pagination bar length)
 5)verify players aadharcard details
+6)Bid status page unsold and sold will coming same page
+7)maximum players based bidding lock (if 15 members in 1 team then admin can disallow for biding  using maximum player count is 15)
+8)bid scrren of teams in mobile view some datas not showing
 
+=================================================================================================
 work done:
 1)refresh button page not reloading  during start bid and bid increment (refresh bid screen) admin,and team both mobile and web view
 2)bid screen mobileview template missing problem bcz of amazon ec2 not loaded for new changes
@@ -37,13 +38,9 @@ work done:
 5)reserve ad remaining players logic
 6)database change and backup
 7)admin can lock bidding by team (players registation buttion and team creation button ( button as well as link)enable and disable by admin )
+8)player registration in particular time period
 
 Elastic ip: 13.200.81.17
-
-rules:
-player registration in particular time period
-swap player if any required
-if 15 members in 1 team then admin can disallow for biding 
 
 
 settings
