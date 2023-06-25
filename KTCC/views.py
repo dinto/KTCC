@@ -20,7 +20,9 @@ from django.template import loader
 from .utils import mobileBrowser
 from django.templatetags.static import static
 import csv
-
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 # Create your views here.
 
@@ -576,3 +578,27 @@ def Unsold_players_csv(request):
         writer.writerow([regi[0].id,player.Player_name.name,player.Season])
 
     return response
+    
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+def GeneratePdf(request):
+    players= PlayerInfo.objects.all().order_by('id')
+    #players= PlayerInfo.objects.filter(name='DINTO DAVI T')
+    data = {
+    "players": players,
+    }
+    pdf = render_to_pdf('Registedplayerspdf.html',data)
+    if pdf:
+        response=HttpResponse(pdf,content_type='application/pdf')
+        filename = "PLAYERSLIST.pdf"
+        content = "inline; filename= %s" %(filename)
+        response['Content-Disposition']=content
+        return response
+    return HttpResponse("Page Not Found")

@@ -25,7 +25,7 @@ urlpatterns = [
     path('Unsold_players_csv/', views.Unsold_players_csv, name='Unsold_players_csv'),
     #path('Icon_Player', views.Icon_Player, name='Icon_Player'), 
     #path('GenerateRegisteredPlayersInfo/', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'),
-
+    path('GeneratePdf/', views.GeneratePdf, name='GeneratePdf'),
 
 ]
 

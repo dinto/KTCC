@@ -1,0 +1,242 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+   <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <title>REGISTERED PLAYERS LIST</title>
+    <style>
+        body {
+            color: blue;
+            font-family: Merriweather;
+            font-size: 20px;
+            
+            
+           
+          }
+        profile{
+            border-radius: 25px;
+            border: 2px solid #73AD21;
+        }
+        .dot {
+            height: 25px;
+            width: 25px;
+            background-color: #73AD21;
+            border-radius: 50%;
+            display: inline-block;
+            border: 2px solid #73AD21;
+        }
+       
+    .background{
+        background-image: url('http://localhost:8000/static/images/cricketstadium.jpg')  ;
+        filter:blur(2px);
+
+    }
+        
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+    </style>
+</head>
+<body>
+<div>
+    <caption style="text-align: center; ">REGISTERED PLAYERS LIST FOR T10 CRICKET LEAGUE SEASON - 1</caption> 
+    <br/>
+    {% for player in players %}  
+    <table style=" border: 1px solid rgba(2, 143, 9, 0.685); ">
+        <tr>
+            <th colspan="3">PLAYER PROFILE</th>
+        </tr>
+        <tr>
+            <td rowspan="5" style="text-align: center;">
+                <img   src="http://localhost:8000/static/{{player.Profile_Pic}}"   width="100%" height="100%" alt="profile pic">
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img    src="http://localhost:8000/static/images/icons/name.png" width="35" height="30" alt="name"> 
+                <span style="text-align: center;">Name</span>
+            </td>
+            <td>
+                {{player.name}}
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <img  src="http://localhost:8000/static/images/icons/phone.png" width="35" height="30" alt="phone">
+                <span style="text-align: center;">Phone</span> 
+            </td>
+            <td>
+                {{player.phone_number}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img  src="http://localhost:8000/static/images/icons/bat&ball.png" width="35" height="30" alt="Role">
+                <span style="text-align: center;">Role</span>
+            </td>
+            <td>
+                {{player.Role}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img  src="http://localhost:8000/static/images/icons/batman.png" width="35" height="30" alt="Batting style"> 
+                <span style="text-align: center;">
+                    Batting Style
+                </span>
+            </td>
+            <td>
+                {{player.Batting_style}}
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <span class="dot"  >{{player.id}}</span>
+            </td>
+            <td>
+                <img  src="http://localhost:8000/static/images/icons/ball.png" width="35" height="30" alt="Bowling style"> 
+                <span style="text-align: center;">
+                    Bowling Style
+                </span>
+            </td>
+            <td>
+                {{player.Bowling_style}}
+            </td>
+        </tr>   
+    </table>
+    <br/>
+    {% endfor %}
+
+    
+</div>
+    
+   <!--
+    {% for player in players %}  
+
+        <table style=" border: 1px solid black;  border-collapse: collapse;">
+            <tr>
+                <th></th>
+                <th colspan="3">player profile</th>
+            </tr>
+            <tr>
+                <td rowspan = "6">
+                    <img  src="http://localhost:8000/static/Profile_Pic/gate.JPG" alt="profile pic">
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td >
+                
+                </td>
+                <td>
+                    
+                    <img  src="http://localhost:8000/static/images/icons/name.png" width="15" height="20" alt="name">
+                </td>
+                <td>
+                    name
+                </td>
+                <td>
+                    {{player.name}}
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    
+                </td>
+                <td>
+                    <img  src="http://localhost:8000/static/images/icons/phone.png" width="15" height="20" alt="phone">
+                </td>
+                <td>
+                    phone
+                </td>
+                <td>
+                    {{player.phone_number}}
+                </td>
+            </tr>
+            <tr>
+                <td >   
+                </td>
+                <td>
+                    <img  src="http://localhost:8000/static/images/icons/bat&ball.png" width="15" height="20" alt="Role">
+                </td>
+                <td>
+                    Role
+                </td>
+                <td>
+                    {{player.Role}}
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <img  src="http://localhost:8000/static/images/icons/batman.png" width="15" height="20" alt="Batting style">
+                </td>
+                <td>
+                    Batting style
+
+                </td>
+                <td>
+                    {{player.Batting_style}}
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <img  src="http://localhost:8000/static/images/icons/ball.png"  width="15" height="20" alt="Bowling style">
+                </td>
+                <td>
+                    Bowling style
+
+                </td>
+                <td>
+                    {{player.Bowling_style}}
+                </td>
+            </tr>
+
+            <tfoot>
+                <tr> 
+                    <td>
+                        {{player.id}}
+                    </td>
+                
+                    <th colspan= "3">BATTLE ON: AUG 11&12</th>
+                </tr>
+            </tfoot>
+        </table>
+
+
+
+            
+            
+    {% endfor %}
+    -->
+</body>
+</html>
