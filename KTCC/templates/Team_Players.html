@@ -4,78 +4,87 @@
 {% block content %}
 <br/>
 <br/><br/>
-
-<div class="heading text-center">
-    <span>
-        Batsman
-    </span>
-    <hr style="color: red;"/>
-    {% for Team in Team_players %}
-        {% if Team.Player_name.Role == 'Batsman' %}
-
-            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
-            {{Team.Player_name.name}}
-        {% endif %}
-    {% endfor%}
-    <p>
-        <hr style="color: red;"/> 
-    </p>
-    <span>
-        Batting Allrounder
-    </span>
-    <hr style="color: red;"/>
-    {% for Team in Team_players %}
-        {% if Team.Player_name.Role == 'Batting Allrounder' %}
-            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
-            {{Team.Player_name.name}}
-        {% endif %}
-    {% endfor%}
-    <p>
-        <hr style="color: red;"/> 
-    </p>
-    <span>
-        Wicket-Keeper
-    </span>
-    <hr style="color: red;"/>
-    {% for Team in Team_players %}
-        {% if Team.Player_name.Role == 'Wicket-Keeper' %}
-            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
-            {{Team.Player_name.name}}
-        {% endif %}
-    {% endfor%}
-    <p>
-        <hr style="color: red;"/> 
-    </p>
-    <span>
-        Bowling Allrounder
-    </span>
-    <hr style="color: red;"/>
-    {% for Team in Team_players %}
-        {% if Team.Player_name.Role == 'Bowling Allrounder' %}
-        <div class="card d-flex" style="width: 10rem; float:left">
-            <img class=" rounded-circle" src="/static/{{Team.Player_name.Profile_Pic}}"  width=80 alt="  ">
-            {{Team.Player_name.name}}
-        </div>
-        {% endif %}
-    {% endfor%}
-    <p>
-        <hr style="color: red;"/> 
-    </p>
-    <span>
-        Bowler
-    </span>
-    <hr style="color: red;"/>
-    {% for Team in Team_players %}
-        {% if Team.Player_name.Role == 'Bowler' %}
-            <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle" width=80>
-            {{Team.Player_name.name}}
-        {% endif %}
-    {% endfor%}
-
+<br/>
+<h2 style="text-align: center; color: aliceblue;">{{Team_name}}</h2>
+<div style="padding-left: 1%; padding-right: 1%;">
+<table class="table table-hover table-bordered" >
+      <tr>
+        <th scope="col" style="color: aliceblue;">Batsman</th>
+        {% for Team in Team_players %}
+            {% if Team.Player_name.Role == 'Batsman' %}
+            <td>
+                <div class="card" style="width: 10rem;">
+                    <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle " width=100>
+                    <div class="card-body">
+                      <h5 class="card-title">{{Team.Player_name.name}}</h5>
+                    </div>
+                  </div>
+            </td>
+            {% endif %}
+        {% endfor%}
+      </tr>
+      <tr>
+        <th scope="col" style="color: aliceblue;">Batting Allrounder</th>
+        {% for Team in Team_players %}
+            {% if Team.Player_name.Role == 'Batting Allrounder' %}
+            <td>
+                <div class="card" style="width: 10rem;">
+                    <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle " width=100>
+                    <div class="card-body">
+                      <h5 class="card-title">{{Team.Player_name.name}}</h5>
+                    </div>
+                  </div>
+            </td>
+            {% endif %}
+        {% endfor%}
+      </tr>
+      <tr>
+        <th scope="col" style="color: aliceblue;">Wicket-Keeper</th>
+        {% for Team in Team_players %}
+            {% if Team.Player_name.Role == 'Wicket-Keeper' %}
+            <td>
+                <div class="card" style="width: 10rem;">
+                    <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle " width=100>
+                    <div class="card-body">
+                      <h5 class="card-title">{{Team.Player_name.name}}</h5>
+                    </div>
+                  </div>
+            </td>
+            {% endif %}
+        {% endfor%}
+      </tr>
+      <tr>
+        <th scope="col" style="color: aliceblue;">Bowling Allrounder</th>
+        {% for Team in Team_players %}
+            {% if Team.Player_name.Role == 'Bowling Allrounder' %}
+            <td>
+                <div class="card" >
+                    <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle " width=100>
+                    <div class="card-body">
+                        <h5 class="card-title">{{Team.Player_name.name}}</h5>
+                    </div>
+                  </div>
+            </td>
+            {% endif %}
+        {% endfor%}
+      </tr>
+      <tr>
+        <th scope="col" style="color: aliceblue;">Bowler</th>
+        {% for Team in Team_players %}
+            {% if Team.Player_name.Role == 'Bowler' %}
+            <td>
+                <div class="card" style="width: 10rem;">
+                    <img src="/static/{{Team.Player_name.Profile_Pic}}" class="rounded-circle " width=100>
+                    <div class="card-body">
+                      <h5 class="card-title">{{Team.Player_name.name}}</h5>
+                    </div>
+                  </div>
+            </td>
+            {% endif %}
+        {% endfor%}
+      </tr>
+  </table>
 </div>
-
-
-
 
 
 {% endblock content %}

@@ -494,9 +494,21 @@ def Team_players(request,id):
     #Team_players = list(Bid_Details.objects.filter(Team_Name=Team_name.id))
     #Team_players = [Team_players[i:i+2] for i in range(0, len(Team_players), 2)]
     context = {
-        "Team_players":Team_players
+        "Team_players":Team_players,
+        "Team_name":Team_name
     }
     return render(request, "Team_Players.html",context)
+
+
+def Myauction(request,id):
+    Team_name=TeamInfo.objects.get(id=id)
+    Team_players = Bid_Details.objects.filter(Team_Name=Team_name.id)
+    context = {
+        "Team_players":Team_players,
+        "Team_name":Team_name
+    }
+    return render(request, "Team_Players.html",context)
+
 def Icon_Player(request):
     #Players = Bid_Details.objects.get()
     #context = {

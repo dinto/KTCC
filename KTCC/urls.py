@@ -26,6 +26,7 @@ urlpatterns = [
     #path('Icon_Player', views.Icon_Player, name='Icon_Player'), 
     #path('GenerateRegisteredPlayersInfo/', views.GenerateRegisteredPlayersInfo, name='GenerateRegisteredPlayersInfo'),
     path('GeneratePdf/', views.GeneratePdf, name='GeneratePdf'),
+    path('Myauction/<int:id>',views.Myauction, name='Myauction'), 
 
 ]
 
