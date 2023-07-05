@@ -21,13 +21,16 @@ not emergency work:
 
 work pending:
 1)pdf work (icon players,players registration ,sold players)
-2)design part in my auction and team players 
+2)
+3)Bid status page unsold and sold will coming same page
+4)maximum players based bidding lock (if 15 members in 1 team then admin can disallow for biding  using maximum player count is 15)
+5)bid screen of teams in mobile view some datas not showing
+
+ 
+  
 3)documents for team, admin database and admin in bid day
 4)check if 300 players in view of bid status and player registration (issue of pagination bar length)
 5)verify players aadharcard details
-6)Bid status page unsold and sold will coming same page
-7)maximum players based bidding lock (if 15 members in 1 team then admin can disallow for biding  using maximum player count is 15)
-8)bid scrren of teams in mobile view some datas not showing
 
 =================================================================================================
 work done:
@@ -39,8 +42,9 @@ work done:
 6)database change and backup
 7)admin can lock bidding by team (players registation buttion and team creation button ( button as well as link)enable and disable by admin )
 8)player registration in particular time period
+9)design part in my auction and team players 
 
-Elastic ip: 13.200.81.17
+Elastic ip: 35.154.188.68
 
 
 settings
@@ -54,22 +58,3 @@ sudo supervisorctl reread
 sudo supervisorctl update 
 sudo supervisorctl status
 sudo systemctl reload nginx
-
-
-      img.background {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-        filter: blur(5px);
-    }
-    @page {
-        size: a4;
-        /*background-image: url('http://localhost:8000/static/images/cricketstadium.jpg');*/
-        height: 100%;
-        width: 100%;
-        opacity: 0.2;
-    }

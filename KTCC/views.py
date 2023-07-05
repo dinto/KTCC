@@ -467,7 +467,7 @@ def BidStatus(request):
                 "sold_players_paginaton":sold_players_paginaton,
                 "nums":nums
             }
-            return render(request, "BidStatus.html",context)
+            return render(request, "BidStatusnew.html",context)
     if request.method == "GET" and 'search_unsold' in request.GET: 
         query =request.GET.get('query_unsold')
         if query:
@@ -475,7 +475,7 @@ def BidStatus(request):
             context = {
                 "UnSold_Players":search
             }
-            return render(request, "BidStatus.html",context)
+            return render(request, "BidStatusnew.html",context)
 
     context = {
         "Sold_Players":Sold_Players,
@@ -485,7 +485,7 @@ def BidStatus(request):
         "nums":nums
 
     }
-    return render(request, "BidStatus.html",context)
+    return render(request, "BidStatusnew.html",context)
 
 def Team_players(request,id):
     Team_name=TeamInfo.objects.get(id=id)
