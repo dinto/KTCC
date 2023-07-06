@@ -501,7 +501,8 @@ def Team_players(request,id):
 
 
 def Myauction(request,id):
-    Team_name=TeamInfo.objects.get(id=id)
+    logged_team =TeamInfo.objects.filter(Users =  request.user.id)
+    Team_name=TeamInfo.objects.get(id=logged_team[0].id)
     Team_players = Bid_Details.objects.filter(Team_Name=Team_name.id)
     context = {
         "Team_players":Team_players,
