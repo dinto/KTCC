@@ -71,7 +71,7 @@
 <div class="card" style="width: 24rem; margin: 10px"  id="image_container">
   <div class="row">
       <div class="col-6">
-          <img src="/static/{{Unsold_Player.Player_name.Profile_Pic}}" class="player" >
+          <img src="/static/{{Unsold_Player.Player_name.Profile_Pic}}" width="100%" class="player" >
           
       </div>
       <div class="col-6">   
@@ -108,7 +108,7 @@
             <div class="card" style=" margin: 10px"  id="image_container">
               <div class="row">
                   <div class="col-4">
-                      <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" class="player" >
+                      <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" width="100%" class="player" >
                       
                   </div>
                   <div class="col-8">   
@@ -125,7 +125,7 @@
 
                     </div>
                     <div class="col-4">
-                        <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}"  class="team ">
+                        <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}" width="100%" class="team ">
                     </div>
                 </div>
                 
@@ -136,7 +136,7 @@
       </div>
       {% endfor %}
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination flex-wrap">
           {% if sold_players_paginaton.has_previous %}
           <li class="page-item"><a href="?page=1"  class="page-link">&laquo First</a></li>
           <li class="page-item"><a href="?page={{sold_players_paginaton.previous_page_number}}"  class="page-link"> Previous</a></li>
