@@ -231,14 +231,18 @@ def Bid_Screen(request):
                 current_team =TeamInfo.objects.filter(Users = current_user.id)
                 Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
                 #if(Available_Point[0].Available_Point>=incremental):
-                if(Max_Available_point_To_bid>=incremental):    
+                season=Season.objects.all()
+                Minimum_Players_Per_Team=season[0].Minimum_Players_Per_Team
+                if(Max_Available_point_To_bid>=incremental and Minimum_Players_Per_Team>Players_count):    
                 
                     CurrentBid_details.update(Team_Name=current_team[0],Current_Bid_Point=incremental)
             else:
                 current_team =TeamInfo.objects.filter(Users = current_user.id)
                 Available_Point=Available_Point_Table.objects.filter(Team_Name=current_team[0])
                 #if(Available_Point[0].Available_Point>=1000):
-                if(Max_Available_point_To_bid>=1000):
+                season=Season.objects.all()
+                Minimum_Players_Per_Team=season[0].Minimum_Players_Per_Team
+                if(Max_Available_point_To_bid>=1000 and Minimum_Players_Per_Team>Players_count):
                     CurrentBid_details=CurrentBid.objects.create(
                         Player_name=random_object[0].Player_name,
                         Current_Bid_Point=Base_piont,
