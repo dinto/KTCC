@@ -105,10 +105,10 @@
       <div class="row">
         {% for Sold_Player in bid_Sold_Player %}
           <div class="col-sm">
-            <div class="card" style=" margin: 10px"  id="image_container">
+            <div class="card" style=" margin: 10px;width:80%"  id="image_container">
               <div class="row">
                   <div class="col-4">
-                      <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" width="100%" class="player" >
+                      <img src="/static/{{Sold_Player.Player_name.Profile_Pic}}" width="100" class="player" >
                       
                   </div>
                   <div class="col-8">   
@@ -125,7 +125,7 @@
 
                     </div>
                     <div class="col-4">
-                        <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}" width="100%" class="team ">
+                        <img src="/static/{{Sold_Player.Team_Name.Team_Logo}}" width="100"  class="team ">
                     </div>
                 </div>
                 

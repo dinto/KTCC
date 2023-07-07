@@ -452,7 +452,7 @@ def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
     Unsold_players = Unsold_player.objects.all()
     posts_Bid_Details = list(Bid_Details.objects.all().order_by('-id'))
-    column_num=3
+    column_num=4
     posts_Bid_Details = [posts_Bid_Details[i:i+column_num] for i in range(0, len(posts_Bid_Details), column_num)]
     #Players_model= PlayerInfo.objects.all().order_by('-id')
     p = Paginator(posts_Bid_Details,column_num*1)
@@ -465,7 +465,7 @@ def BidStatus(request):
         query =request.GET.get('query')
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
-            column_num=3
+            column_num=4
             posts_Bid_Details = [search[i:i+column_num] for i in range(0, len(search), column_num)]
             p = Paginator(posts_Bid_Details,column_num*1)
             page = request.GET.get('page')
