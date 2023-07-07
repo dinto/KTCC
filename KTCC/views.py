@@ -465,9 +465,14 @@ def BidStatus(request):
         query =request.GET.get('query')
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
+            column_num=3
+            posts_Bid_Details = [search[i:i+column_num] for i in range(0, len(search), column_num)]
+            p = Paginator(posts_Bid_Details,column_num*1)
+            page = request.GET.get('page')
+            sold_players_paginaton = p.get_page(page)
+            nums = "a" * sold_players_paginaton.paginator.num_pages
             context = {
                 "Sold_Players":search,
-                "posts_Bid_Details":posts_Bid_Details,
                 "sold_players_paginaton":sold_players_paginaton,
                 "nums":nums
             }

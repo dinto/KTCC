@@ -22,13 +22,11 @@ not emergency work:
 work pending:
 1)pdf work (icon players,players registration ,sold players)
 2)bid screen of teams in mobile view some datas not showing
-3)search option not working
 
  
   
 3)documents for team, admin database and admin in bid day
-4)check if 300 players in view of bid status and player registration (issue of pagination bar length)
-5)verify players aadharcard details
+4)verify players aadharcard details
 
 =================================================================================================
 work done:
@@ -43,6 +41,8 @@ work done:
 9)design part in my auction and team players 
 10)Bid status page unsold and sold will coming same page
 11)maximum players based bidding lock (if 15 members in 1 team then admin can disallow for biding  using maximum player count is 15)
+12)check if 300 players in view of bid status and player registration (issue of pagination bar length)
+13)search option not working
 
 Elastic ip: 35.154.188.68
 
