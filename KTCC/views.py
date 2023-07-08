@@ -23,6 +23,7 @@ import csv
 from io import BytesIO
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.db.models import Count
 
 # Create your views here.
 
@@ -348,13 +349,26 @@ def Bid_Screen_new_Player(request):
         CurrentBids = CurrentBid.objects.all()
         if(current_bid_player_count>0):
             random_object =Bid_Bucket.objects.filter(Current_player = True)
+            team_count_details=Bid_Details.objects.all().values('Team_Name_id').annotate(total=Count('Team_Name')).order_by('Team_Name')
+            teamcount_dict={}    
+            for team_count in team_count_details:
+                team_id=team_count['Team_Name_id']
+                Team_name=TeamInfo.objects.get(id=team_id)
+                player_count=team_count['total']
+                Minimum_Players_Per_Team=Season.objects.values('Minimum_Players_Per_Team')[0]['Minimum_Players_Per_Team']
+                remaining_player=Minimum_Players_Per_Team-player_count
+                teamcount_dict.setdefault(team_id,{})
+                teamcount_dict[team_id]['Team_name']=Team_name.Team_Name
+                teamcount_dict[team_id]['Player_count']=player_count
+                teamcount_dict[team_id]['Remaining_player']=remaining_player
             context = {
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
                 "Base_piont":Base_piont,
                 "Bid_bucket_count":Bid_bucket_count,
                 "Unsold_player_count":Unsold_player_count,
-                "Sold_player_count":Sold_player_count
+                "Sold_player_count":Sold_player_count,
+                "team_count_details":teamcount_dict
             }
             if mobileBrowser (request):
                 return render(request, "m_Bid_screen_new_player.html",context)
@@ -365,13 +379,26 @@ def Bid_Screen_new_Player(request):
                 random_object_db = Bid_Bucket.objects.all()[randint(0, Bid_bucket_count - 1)] #single random object
                 Bid_Bucket.objects.filter(Player_name = random_object_db.Player_name).update(Current_player = True)
                 random_object =Bid_Bucket.objects.filter(Current_player = True)
+                team_count_details=Bid_Details.objects.all().values('Team_Name_id').annotate(total=Count('Team_Name')).order_by('Team_Name')
+                teamcount_dict={}    
+                for team_count in team_count_details:
+                    team_id=team_count['Team_Name_id']
+                    Team_name=TeamInfo.objects.get(id=team_id)
+                    player_count=team_count['total']
+                    Minimum_Players_Per_Team=Season.objects.values('Minimum_Players_Per_Team')[0]['Minimum_Players_Per_Team']
+                    remaining_player=Minimum_Players_Per_Team-player_count
+                    teamcount_dict.setdefault(team_id,{})
+                    teamcount_dict[team_id]['Team_name']=Team_name.Team_Name
+                    teamcount_dict[team_id]['Player_count']=player_count
+                    teamcount_dict[team_id]['Remaining_player']=remaining_player
                 context = {
                 "random_object": random_object,
                 "CurrentBid":CurrentBids,
                 "Base_piont":Base_piont,
                 "Bid_bucket_count":Bid_bucket_count,
                 "Unsold_player_count":Unsold_player_count,
-                "Sold_player_count":Sold_player_count
+                "Sold_player_count":Sold_player_count,
+                "team_count_details":teamcount_dict
                 }
                 if mobileBrowser (request):
                     return render(request, "m_Bid_screen_new_player.html",context)
@@ -379,10 +406,23 @@ def Bid_Screen_new_Player(request):
                     return render(request, "Bid_screen_new_player.html",context)
     Unsold_player_count=Unsold_player.objects.count()
     Sold_player_count=Bid_Details.objects.count()
+    team_count_details=Bid_Details.objects.all().values('Team_Name_id').annotate(total=Count('Team_Name')).order_by('Team_Name')
+    teamcount_dict={}    
+    for team_count in team_count_details:
+        team_id=team_count['Team_Name_id']
+        Team_name=TeamInfo.objects.get(id=team_id)
+        player_count=team_count['total']
+        Minimum_Players_Per_Team=Season.objects.values('Minimum_Players_Per_Team')[0]['Minimum_Players_Per_Team']
+        remaining_player=Minimum_Players_Per_Team-player_count
+        teamcount_dict.setdefault(team_id,{})
+        teamcount_dict[team_id]['Team_name']=Team_name.Team_Name
+        teamcount_dict[team_id]['Player_count']=player_count
+        teamcount_dict[team_id]['Remaining_player']=remaining_player
     context = {
     "Bid_bucket_count":Bid_bucket_count,
     "Unsold_player_count":Unsold_player_count,
-    "Sold_player_count":Sold_player_count
+    "Sold_player_count":Sold_player_count,
+    "team_count_details":teamcount_dict
     }
     if mobileBrowser (request):
         return render(request, "m_Bid_screen_new_player.html",context)
@@ -452,7 +492,7 @@ def BidStatus(request):
     Sold_Players = Bid_Details.objects.all()
     Unsold_players = Unsold_player.objects.all()
     posts_Bid_Details = list(Bid_Details.objects.all().order_by('-id'))
-    column_num=4
+    column_num=3
     posts_Bid_Details = [posts_Bid_Details[i:i+column_num] for i in range(0, len(posts_Bid_Details), column_num)]
     #Players_model= PlayerInfo.objects.all().order_by('-id')
     p = Paginator(posts_Bid_Details,column_num*1)
@@ -465,7 +505,7 @@ def BidStatus(request):
         query =request.GET.get('query')
         if query:
             search=Bid_Details.objects.filter(Player_name__name__icontains=query)
-            column_num=4
+            column_num=3
             posts_Bid_Details = [search[i:i+column_num] for i in range(0, len(search), column_num)]
             p = Paginator(posts_Bid_Details,column_num*1)
             page = request.GET.get('page')

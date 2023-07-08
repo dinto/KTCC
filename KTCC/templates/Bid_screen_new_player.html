@@ -191,6 +191,23 @@
     <p class="heading">Sold players count: {{ Sold_player_count}} 
     </p>
 
+    <div>
+      <table class="table table-bordered" style="color: aliceblue;">
+        <tbody>
+          <th>Team Name</th>
+          <th>Player Count</th>
+          <th>Remaining Player</th>
+        </tbody>
+         {% for key,team_count in team_count_details.items %}
+          <tr>
+            <td> {{team_count.Team_name}}</td>
+            <td> {{team_count.Player_count}}</td>
+            <td> {{team_count.Remaining_player}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 {% else %}
     <h2 class="text-center">admin can only see this page so login as admin</h2>
 {% endif %}

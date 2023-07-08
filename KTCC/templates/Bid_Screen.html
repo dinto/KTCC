@@ -197,8 +197,8 @@
 <div class="row " style="margin-left: 40%;">
   <br/>
   <form action="{% url 'Bid_Screen' %}" method="POST">  
-   <button  class="btn btn-primary " name="Increment"   style="text-align: center; margin-left: 25%;" type="submit">Start/Increment Bid For Team</button>
-   <button  type="submit" class="btn btn-info"  style="text-align: center;"><a href="{{ request.get_full_path }}">Reload</a></button>
+   <!--<button  class="btn btn-primary " name="Increment"   style="text-align: center; margin-left: 25%;" type="submit">Start/Increment Bid For Team</button>-->
+   <button  type="submit" class="btn btn-info"  style="text-align: center;margin-left: 25%;"><a href="{{ request.get_full_path }}">Reload</a></button>
   </form>
 </div>
 <span style="color:white;">players count: {{Players_count}}</span>
